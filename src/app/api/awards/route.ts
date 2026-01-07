@@ -1,0 +1,23 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { prisma } from '@/lib/prisma';
+
+export async function GET() {
+  try {
+    const awards = await prisma.award.findMany({
+      orderBy: { year: 'desc' },
+    });
+    return NextResponse.json(awards);
+  } catch (error) {
+    return NextResponse.json({ error: 'Failed to fetch awards' }, { status: 500 });
+  }
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const award = await prisma.award.create({ data: body });
+    return NextResponse.json(award, { status: 201 });
+  } catch (error) {
+    return NextResponse.json({ error: 'Failed to create award' }, { status: 500 });
+  }
+}
