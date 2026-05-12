@@ -121,7 +121,7 @@ export default function PublicationsSection() {
   }
 
   return (
-    <section id="publications" className="py-24 relative">
+    <section id="publications" className="py-12 relative">
       {/* Background vignette */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0A0F1E]/60 to-transparent pointer-events-none" />
 

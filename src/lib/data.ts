@@ -490,9 +490,9 @@ export const identityBadges = [
 export const navLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/#about" },
-  { label: "Research", href: "/#research" },
   { label: "Experience", href: "/#experience" },
+  {label:"Team",href:"/team"},
+  { label: "Projects", href: "/projects" },
   { label: "Publications", href: "/publications" },
   { label: "Awards", href: "/#awards" },
-  { label: "Contact", href: "/#contact" },
 ];

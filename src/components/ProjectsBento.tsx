@@ -79,7 +79,7 @@ export default function ProjectsBento() {
     : dbProjects.filter((p) => p.category === activeFilter);
 
   return (
-    <section id="projects" className="py-24 relative">
+    <section id="projects" className="py-12 relative">
       {/* Background accent */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/10 to-transparent pointer-events-none" />
 

@@ -24,13 +24,6 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from '@/components/ui/card';
-import {
   Select,
   SelectContent,
   SelectItem,
@@ -113,6 +106,35 @@ const defaultValues: FormValues = {
   link: '',
 };
 
+/* ── Stat card ──────────────────────────────────────────────── */
+type StatCardProps = {
+  label: string;
+  value: number | string;
+  icon: React.ElementType;
+  accent: string;
+  bar: string;
+};
+
+function StatCard({ label, value, icon: Icon, accent, bar }: StatCardProps) {
+  return (
+    <div className="relative overflow-hidden rounded-xl bg-zinc-900 border border-zinc-800 p-5 flex items-center gap-4 group hover:border-zinc-700 transition-all duration-200">
+      {/* Accent bar */}
+      <div className={`absolute left-0 top-0 bottom-0 w-0.5 ${bar} rounded-l-xl`} />
+      <div className={`p-2.5 rounded-lg ${accent} shrink-0`}>
+        <Icon className="h-4.5 w-4.5 h-[18px] w-[18px]" />
+      </div>
+      <div className="min-w-0">
+        <p className="text-2xl font-bold text-zinc-50 tabular-nums leading-none">{value}</p>
+        <p className="text-xs text-zinc-500 mt-1 leading-snug">{label}</p>
+      </div>
+    </div>
+  );
+}
+
+/* ── Form field wrapper ─────────────────────────────────────── */
+const fieldCls =
+  'bg-zinc-900 border-zinc-800 text-zinc-100 placeholder:text-zinc-600 focus-visible:ring-amber-500/30 focus-visible:border-amber-500/40 text-sm';
+
 export default function PublicationsPage() {
   const [publications, setPublications] = useState<Publication[]>([]);
   const [isPending, startTransition] = useTransition();
@@ -130,26 +152,18 @@ export default function PublicationsPage() {
     if (res?.data) setPublications(res.data as Publication[]);
   }
 
-  useEffect(() => {
-    loadPublications();
-  }, []);
+  useEffect(() => { loadPublications(); }, []);
 
-  /* ── Stats ──────────────────────────────────────────────── */
   const stats = {
     total: publications.length,
-    journals: publications.filter(
-      (p) => p.type?.toLowerCase() === 'journal'
-    ).length,
-    conferences: publications.filter(
-      (p) => p.type?.toLowerCase() === 'conference'
-    ).length,
+    journals: publications.filter((p) => p.type?.toLowerCase() === 'journal').length,
+    conferences: publications.filter((p) => p.type?.toLowerCase() === 'conference').length,
     latestYear:
       publications.length > 0
         ? Math.max(...publications.map((p) => p.year))
         : new Date().getFullYear(),
   };
 
-  /* ── Handlers ───────────────────────────────────────────── */
   const handleEdit = (pub: Publication) => {
     setEditingId(pub.id);
     form.reset({
@@ -169,10 +183,7 @@ export default function PublicationsPage() {
     if (!deleteId) return;
     startTransition(async () => {
       const res = await deletePublication(deleteId);
-      if (res?.error) {
-        toast.error(res.error);
-        return;
-      }
+      if (res?.error) { toast.error(res.error); return; }
       toast.success('Publication deleted');
       setDeleteId(null);
       loadPublications();
@@ -188,45 +199,24 @@ export default function PublicationsPage() {
 
     startTransition(async () => {
       let fileUrl = '';
-
       if (file) {
         const fileExt = file.name.split('.').pop();
-        const fileName = `${Date.now()}-${Math.random()
-          .toString(36)
-          .substring(7)}.${fileExt}`;
+        const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
         const filePath = `publications/${fileName}`;
-
         const { error: uploadError } = await supabase.storage
           .from('documents')
           .upload(filePath, file, { cacheControl: '3600', upsert: false });
-
-        if (uploadError) {
-          toast.error(`Upload failed: ${uploadError.message}`);
-          return;
-        }
-
-        const { data: publicUrlData } = supabase.storage
-          .from('documents')
-          .getPublicUrl(filePath);
-
+        if (uploadError) { toast.error(`Upload failed: ${uploadError.message}`); return; }
+        const { data: publicUrlData } = supabase.storage.from('documents').getPublicUrl(filePath);
         fileUrl = publicUrlData.publicUrl;
       }
-
       const formData = new FormData();
-      Object.entries(values).forEach(([key, value]) =>
-        formData.append(key, value as string)
-      );
+      Object.entries(values).forEach(([key, value]) => formData.append(key, value as string));
       if (fileUrl) formData.append('pdfUrl', fileUrl);
-
       const result = editingId
         ? await updatePublication(editingId, formData)
         : await addPublication(formData);
-
-      if (result?.error) {
-        toast.error(result.error);
-        return;
-      }
-
+      if (result?.error) { toast.error(result.error); return; }
       toast.success(editingId ? 'Publication updated' : 'Publication added');
       setEditingId(null);
       setIsAddOpen(false);
@@ -236,226 +226,158 @@ export default function PublicationsPage() {
     });
   }
 
-  /* ── Shared form body ───────────────────────────────────── */
+  /* ── Shared form ────────────────────────────────────────────── */
   const renderFormFields = (isEdit: boolean) => (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5 px-2">
-        {/* Title */}
-        <FormField
-          control={form.control}
-          name="title"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-zinc-300">
-                Title <span className="text-red-400">*</span>
-              </FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Publication title"
-                  className="bg-zinc-900 border-zinc-700 text-zinc-100 placeholder:text-zinc-600 focus-visible:ring-amber-500/40"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
 
-        {/* Publisher + Type */}
-        <div className="grid grid-cols-2 gap-4">
-          <FormField
-            control={form.control}
-            name="publisher"
-            render={({ field }) => (
+        {/* Title */}
+        <FormField control={form.control} name="title" render={({ field }) => (
+          <FormItem>
+            <FormLabel className="text-zinc-400 text-xs font-semibold uppercase tracking-wider">
+              Title <span className="text-red-400 normal-case">*</span>
+            </FormLabel>
+            <FormControl>
+              <Input placeholder="Publication title" className={fieldCls} {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )} />
+
+        {/* Publisher + Year row */}
+        <div className="grid grid-cols-3 gap-3">
+          <div className="col-span-2">
+            <FormField control={form.control} name="publisher" render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-zinc-300">
+                <FormLabel className="text-zinc-400 text-xs font-semibold uppercase tracking-wider">
                   Publisher <span className="text-red-400">*</span>
                 </FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="IEEE, ACM, Springer…"
-                    className="bg-zinc-900 border-zinc-700 text-zinc-100 placeholder:text-zinc-600 focus-visible:ring-amber-500/40"
-                    {...field}
-                  />
+                  <Input placeholder="Conference / Journal name" className={fieldCls} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="type"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-zinc-300">
-                  Type <span className="text-red-400">*</span>
-                </FormLabel>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <FormControl>
-                    <SelectTrigger className="bg-zinc-900 border-zinc-700 text-zinc-100 focus:ring-amber-500/40">
-                      <SelectValue placeholder="Select type" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent className="bg-zinc-900 border-zinc-800 text-zinc-100">
-                    {PUBLICATION_TYPES.map((t) => (
-                      <SelectItem
-                        key={t}
-                        value={t}
-                        className="focus:bg-zinc-800 focus:text-zinc-100"
-                      >
-                        {t}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+            )} />
+          </div>
+          <FormField control={form.control} name="year" render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-zinc-400 text-xs font-semibold uppercase tracking-wider">
+                Year <span className="text-red-400">*</span>
+              </FormLabel>
+              <FormControl>
+                <Input placeholder="2024" className={fieldCls} {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )} />
         </div>
 
-        {/* Year + DOI */}
-        <div className="grid grid-cols-2 gap-4">
-          <FormField
-            control={form.control}
-            name="year"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-zinc-300">
-                  Year <span className="text-red-400">*</span>
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    type="number"
-                    min="1900"
-                    max="2099"
-                    className="bg-zinc-900 border-zinc-700 text-zinc-100 focus-visible:ring-amber-500/40"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="doi"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-zinc-300">DOI</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="10.1000/xyz123"
-                    className="bg-zinc-900 border-zinc-700 text-zinc-100 placeholder:text-zinc-600 focus-visible:ring-amber-500/40"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
+        {/* Type */}
+        <FormField control={form.control} name="type" render={({ field }) => (
+          <FormItem>
+            <FormLabel className="text-zinc-400 text-xs font-semibold uppercase tracking-wider">
+              Type <span className="text-red-400">*</span>
+            </FormLabel>
+            <Select onValueChange={field.onChange} value={field.value}>
+              <FormControl>
+                <SelectTrigger className={`${fieldCls} focus:ring-amber-500/30`}>
+                  <SelectValue placeholder="Select type…" />
+                </SelectTrigger>
+              </FormControl>
+              <SelectContent className="bg-zinc-900 border-zinc-800 text-zinc-100">
+                {PUBLICATION_TYPES.map((t) => (
+                  <SelectItem key={t} value={t} className="focus:bg-zinc-800 focus:text-zinc-100">
+                    {t}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <FormMessage />
+          </FormItem>
+        )} />
 
         {/* Authors */}
-        <FormField
-          control={form.control}
-          name="authors"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-zinc-300">
-                Authors <span className="text-red-400">*</span>
-              </FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="John Doe, Jane Smith, …"
-                  className="bg-zinc-900 border-zinc-700 text-zinc-100 placeholder:text-zinc-600 focus-visible:ring-amber-500/40"
-                  {...field}
-                />
-              </FormControl>
-              <p className="text-[11px] text-zinc-600">Comma-separated</p>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <FormField control={form.control} name="authors" render={({ field }) => (
+          <FormItem>
+            <FormLabel className="text-zinc-400 text-xs font-semibold uppercase tracking-wider">
+              Authors <span className="text-red-400">*</span>
+            </FormLabel>
+            <FormControl>
+              <Input placeholder="Author One, Author Two, …" className={fieldCls} {...field} />
+            </FormControl>
+            <p className="text-[10px] text-zinc-600 mt-0.5">Comma-separated</p>
+            <FormMessage />
+          </FormItem>
+        )} />
 
         {/* Keywords */}
-        <FormField
-          control={form.control}
-          name="keywords"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-zinc-300">
-                Keywords <span className="text-red-400">*</span>
-              </FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="AI, Machine Learning, NLP"
-                  className="bg-zinc-900 border-zinc-700 text-zinc-100 placeholder:text-zinc-600 focus-visible:ring-amber-500/40"
-                  {...field}
-                />
-              </FormControl>
-              <p className="text-[11px] text-zinc-600">Comma-separated</p>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <FormField control={form.control} name="keywords" render={({ field }) => (
+          <FormItem>
+            <FormLabel className="text-zinc-400 text-xs font-semibold uppercase tracking-wider">
+              Keywords <span className="text-red-400">*</span>
+            </FormLabel>
+            <FormControl>
+              <Input placeholder="machine learning, NLP, …" className={fieldCls} {...field} />
+            </FormControl>
+            <p className="text-[10px] text-zinc-600 mt-0.5">Comma-separated</p>
+            <FormMessage />
+          </FormItem>
+        )} />
 
         {/* Description */}
-        <FormField
-          control={form.control}
-          name="description"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-zinc-300">
-                Description <span className="text-red-400">*</span>
-              </FormLabel>
-              <FormControl>
-                <Textarea
-                  rows={4}
-                  placeholder="Brief abstract or description (20–150 chars)…"
-                  className="bg-zinc-900 border-zinc-700 text-zinc-100 placeholder:text-zinc-600 focus-visible:ring-amber-500/40 resize-none"
-                  {...field}
-                />
-              </FormControl>
-              <p className="text-[11px] text-zinc-600">
+        <FormField control={form.control} name="description" render={({ field }) => (
+          <FormItem>
+            <FormLabel className="text-zinc-400 text-xs font-semibold uppercase tracking-wider">
+              Abstract / Description <span className="text-red-400">*</span>
+            </FormLabel>
+            <FormControl>
+              <Textarea
+                rows={4}
+                placeholder="Brief description (20–150 characters)…"
+                className={`${fieldCls} resize-none`}
+                {...field}
+              />
+            </FormControl>
+            <div className="flex justify-between mt-0.5">
+              <FormMessage />
+              <span className={`text-[10px] ml-auto tabular-nums ${(field.value?.length ?? 0) > 140 ? 'text-red-400' : 'text-zinc-600'
+                }`}>
                 {field.value?.length ?? 0} / 150
-              </p>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+              </span>
+            </div>
+          </FormItem>
+        )} />
 
-        {/* External link */}
-        <FormField
-          control={form.control}
-          name="link"
-          render={({ field }) => (
+        {/* DOI + Link row */}
+        <div className="grid grid-cols-2 gap-3">
+          <FormField control={form.control} name="doi" render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-zinc-300">External Link</FormLabel>
+              <FormLabel className="text-zinc-400 text-xs font-semibold uppercase tracking-wider">DOI</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="https://…"
-                  className="bg-zinc-900 border-zinc-700 text-zinc-100 placeholder:text-zinc-600 focus-visible:ring-amber-500/40"
-                  {...field}
-                />
+                <Input placeholder="10.xxxx/…" className={fieldCls} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
-          )}
-        />
+          )} />
+          <FormField control={form.control} name="link" render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-zinc-400 text-xs font-semibold uppercase tracking-wider">External Link</FormLabel>
+              <FormControl>
+                <Input placeholder="https://…" className={fieldCls} {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )} />
+        </div>
 
-        {/* PDF upload */}
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-zinc-300">
-            PDF Upload
-          </label>
+        {/* PDF Upload */}
+        <div className="space-y-1.5">
+          <label className="text-zinc-400 text-xs font-semibold uppercase tracking-wider block">PDF Upload</label>
           <Input
             id={isEdit ? 'edit-pdf' : 'add-pdf'}
             type="file"
             accept="application/pdf"
-            className="bg-zinc-900 border-zinc-700 text-zinc-400 file:text-zinc-300 file:bg-zinc-800 file:border-0 file:rounded file:px-3 file:py-1 cursor-pointer"
+            className={`${fieldCls} cursor-pointer file:text-zinc-300 file:bg-zinc-800 file:border-0 file:rounded-md file:px-3 file:py-1 file:text-xs file:mr-3`}
           />
         </div>
 
@@ -466,7 +388,7 @@ export default function PublicationsPage() {
           <Button
             type="button"
             variant="outline"
-            className="border-zinc-700 bg-zinc-800 text-zinc-300 hover:bg-zinc-700"
+            className="border-zinc-700 bg-transparent text-zinc-400 hover:bg-zinc-800 hover:text-zinc-100 text-sm"
             onClick={() => {
               setEditingId(null);
               setIsAddOpen(false);
@@ -477,9 +399,9 @@ export default function PublicationsPage() {
           </Button>
           <Button
             disabled={isPending}
-            className="bg-amber-500 hover:bg-amber-400 text-zinc-950 font-semibold"
+            className="bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-sm px-5"
           >
-            {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            {isPending && <Loader2 className="mr-2 h-3.5 w-3.5 animate-spin" />}
             {isEdit ? 'Save Changes' : 'Add Publication'}
           </Button>
         </div>
@@ -487,115 +409,65 @@ export default function PublicationsPage() {
     </Form>
   );
 
-  /* ── Page layout ────────────────────────────────────────── */
+  /* ── Page ───────────────────────────────────────────────────── */
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 p-6 md:p-10 space-y-8">
+    <div className="min-h-screen bg-zinc-950 text-zinc-100">
 
-      {/* ── Header ── */}
-      <div className="flex items-start justify-between gap-4 flex-wrap">
+      {/* ── Top bar ── */}
+      <div className="border-b border-zinc-900 bg-zinc-950/80 backdrop-blur-sm sticky top-0 z-10 px-6 md:px-10 py-4 flex items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-zinc-50">
-            Publications
-          </h1>
-          <p className="text-zinc-500 mt-1 text-sm">
-            Manage your research publications portfolio
-          </p>
+          <h1 className="text-xl font-bold tracking-tight text-zinc-50">Publications</h1>
+          <p className="text-zinc-500 text-xs mt-0.5 hidden sm:block">Research portfolio management</p>
         </div>
         <Button
-          onClick={() => {
-            form.reset(defaultValues);
-            setIsAddOpen(true);
-          }}
-          className="bg-amber-500 hover:bg-amber-400 text-zinc-950 font-semibold gap-2 shrink-0"
+          onClick={() => { form.reset(defaultValues); setIsAddOpen(true); }}
+          className="bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold gap-1.5 text-sm h-9 px-4"
         >
-          <Plus className="h-4 w-4" />
+          <Plus className="h-3.5 w-3.5" />
           Add Publication
         </Button>
       </div>
 
-      {/* ── Stats ── */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {[
-          {
-            label: 'Total Publications',
-            value: stats.total,
-            icon: BookOpen,
-            accent: 'text-amber-400 bg-amber-500/10',
-          },
-          {
-            label: 'Journals',
-            value: stats.journals,
-            icon: FileText,
-            accent: 'text-blue-400 bg-blue-500/10',
-          },
-          {
-            label: 'Conferences',
-            value: stats.conferences,
-            icon: GraduationCap,
-            accent: 'text-emerald-400 bg-emerald-500/10',
-          },
-          {
-            label: 'Latest Year',
-            value: stats.latestYear,
-            icon: TrendingUp,
-            accent: 'text-purple-400 bg-purple-500/10',
-          },
-        ].map(({ label, value, icon: Icon, accent }) => (
-          <Card
-            key={label}
-            className="bg-zinc-900 border-zinc-800 hover:border-zinc-700 transition-colors"
-          >
-            <CardContent className="p-5 flex items-center gap-4">
-              <div className={`p-2.5 rounded-lg ${accent}`}>
-                <Icon className="h-5 w-5" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-zinc-50 tabular-nums">
-                  {value}
-                </p>
-                <p className="text-xs text-zinc-500">{label}</p>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+      <div className="px-6 md:px-10 py-8 space-y-8 max-w-screen-2xl mx-auto">
 
-      {/* ── Publications Table ── */}
-      <Card className="bg-zinc-900 border-zinc-800">
-        <CardHeader className="pb-4">
-          <CardTitle className="text-zinc-50 text-lg">
-            All Publications
-          </CardTitle>
-          <CardDescription className="text-zinc-500">
-            Browse, search, sort, and manage your entire publication list
-          </CardDescription>
-        </CardHeader>
-        <Separator className="bg-zinc-800" />
-        <CardContent className="pt-6">
-          <DataTable columns={columns} data={publications} />
-        </CardContent>
-      </Card>
+        {/* ── Stats ── */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+          <StatCard label="Total Publications" value={stats.total} icon={BookOpen} accent="text-amber-400 bg-amber-500/10" bar="bg-amber-500" />
+          <StatCard label="Journals" value={stats.journals} icon={FileText} accent="text-blue-400 bg-blue-500/10" bar="bg-blue-500" />
+          <StatCard label="Conferences" value={stats.conferences} icon={GraduationCap} accent="text-emerald-400 bg-emerald-500/10" bar="bg-emerald-500" />
+          <StatCard label="Latest Year" value={stats.latestYear} icon={TrendingUp} accent="text-purple-400 bg-purple-500/10" bar="bg-purple-500" />
+        </div>
+
+        {/* ── Table card ── */}
+        <div className="rounded-2xl border border-zinc-800 bg-zinc-900/40 overflow-hidden">
+          {/* Card header */}
+          <div className="px-6 py-5 flex items-center justify-between border-b border-zinc-800/80">
+            <div>
+              <h2 className="text-sm font-semibold text-zinc-100">All Publications</h2>
+              <p className="text-xs text-zinc-600 mt-0.5">Browse, search, and manage your research output</p>
+            </div>
+            <span className="text-xs font-mono bg-zinc-800 text-zinc-500 px-2 py-0.5 rounded-md">
+              {publications.length} total
+            </span>
+          </div>
+          <div className="p-6">
+            <DataTable columns={columns} data={publications} />
+          </div>
+        </div>
+      </div>
 
       {/* ── Add Sheet ── */}
       <Sheet
         open={isAddOpen}
-        onOpenChange={(open) => {
-          if (!open) {
-            setIsAddOpen(false);
-            form.reset(defaultValues);
-          }
-        }}
+        onOpenChange={(open) => { if (!open) { setIsAddOpen(false); form.reset(defaultValues); } }}
       >
-        <SheetContent className="w-full sm:max-w-[580px] bg-zinc-950 border-zinc-800 text-zinc-100 overflow-y-auto">
-          <SheetHeader className="pb-4">
-            <SheetTitle className="text-zinc-50 text-xl font-bold">
-              New Publication
-            </SheetTitle>
-            <SheetDescription className="text-zinc-500">
-              Add a research publication to your portfolio.
+        <SheetContent className="w-full sm:max-w-[560px] bg-zinc-950 border-zinc-800/80 text-zinc-100 overflow-y-auto p-6">
+          <SheetHeader className="mb-6">
+            <SheetTitle className="text-zinc-50 text-lg font-bold">New Publication</SheetTitle>
+            <SheetDescription className="text-zinc-500 text-sm">
+              Fill in the details below to add to your portfolio.
             </SheetDescription>
           </SheetHeader>
-          <Separator className="bg-zinc-800 mb-6" />
           {renderFormFields(false)}
         </SheetContent>
       </Sheet>
@@ -603,54 +475,39 @@ export default function PublicationsPage() {
       {/* ── Edit Dialog ── */}
       <Dialog
         open={!!editingId}
-        onOpenChange={(open) => {
-          if (!open) {
-            setEditingId(null);
-            form.reset(defaultValues);
-          }
-        }}
+        onOpenChange={(open) => { if (!open) { setEditingId(null); form.reset(defaultValues); } }}
       >
-        <DialogContent className="sm:max-w-[660px] bg-zinc-950 border-zinc-800 text-zinc-100 max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle className="text-zinc-50 text-xl font-bold">
-              Edit Publication
-            </DialogTitle>
+        <DialogContent className="sm:max-w-[620px] bg-zinc-950 border-zinc-800 text-zinc-100 max-h-[90vh] overflow-y-auto p-6">
+          <DialogHeader className="mb-6">
+            <DialogTitle className="text-zinc-50 text-lg font-bold">Edit Publication</DialogTitle>
           </DialogHeader>
-          <Separator className="bg-zinc-800" />
-          <div className="pt-2">{renderFormFields(true)}</div>
+          {renderFormFields(true)}
         </DialogContent>
       </Dialog>
 
       {/* ── Delete Alert ── */}
       <AlertDialog
         open={!!deleteId}
-        onOpenChange={(open) => {
-          if (!open) setDeleteId(null);
-        }}
+        onOpenChange={(open) => { if (!open) setDeleteId(null); }}
       >
-        <AlertDialogContent className="bg-zinc-900 border-zinc-800 text-zinc-100">
+        <AlertDialogContent className="bg-zinc-900 border-zinc-800 text-zinc-100 max-w-sm">
           <AlertDialogHeader>
-            <AlertDialogTitle className="text-zinc-50">
-              Delete this publication?
-            </AlertDialogTitle>
-            <AlertDialogDescription className="text-zinc-400">
-              This action is permanent and cannot be undone. The publication
-              will be removed from your portfolio immediately.
+            <AlertDialogTitle className="text-zinc-50">Delete this publication?</AlertDialogTitle>
+            <AlertDialogDescription className="text-zinc-400 text-sm leading-relaxed">
+              This is permanent and cannot be undone. The publication will be removed from your portfolio immediately.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel className="border-zinc-700 bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:text-zinc-100">
+            <AlertDialogCancel className="border-zinc-700 bg-transparent text-zinc-400 hover:bg-zinc-800 hover:text-zinc-100">
               Cancel
             </AlertDialogCancel>
             <AlertDialogAction
               onClick={handleDeleteConfirm}
               disabled={isPending}
-              className="bg-red-600 hover:bg-red-500 text-white"
+              className="bg-red-600 hover:bg-red-500 text-white font-semibold"
             >
-              {isPending && (
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              )}
-              Delete Publication
+              {isPending && <Loader2 className="mr-2 h-3.5 w-3.5 animate-spin" />}
+              Delete
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

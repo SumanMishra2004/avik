@@ -4,7 +4,6 @@ import { useState } from 'react';
 import {
     ColumnDef,
     SortingState,
-    ColumnFiltersState,
     flexRender,
     getCoreRowModel,
     useReactTable,
@@ -30,18 +29,13 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
-import { Search, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react';
-
-const PUBLICATION_TYPES = [
-    'all',
-    'Journal',
-    'Conference',
-    'Workshop',
-    'Book Chapter',
-    'Preprint',
-    'Technical Report',
-    'Thesis',
-];
+import {
+    Search,
+    ChevronLeft,
+    ChevronRight,
+    ChevronsLeft,
+    ChevronsRight,
+} from 'lucide-react';
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
@@ -54,8 +48,6 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
     const [globalFilter, setGlobalFilter] = useState('');
     const [sorting, setSorting] = useState<SortingState>([]);
-    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-    const [typeFilter, setTypeFilter] = useState('all');
 
     const table = useReactTable({
         data,
@@ -64,25 +56,11 @@ export function DataTable<TData, TValue>({
         getPaginationRowModel: getPaginationRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
         getSortedRowModel: getSortedRowModel(),
-        state: {
-            globalFilter,
-            sorting,
-            columnFilters,
-        },
+        state: { globalFilter, sorting },
         onGlobalFilterChange: setGlobalFilter,
         onSortingChange: setSorting,
-        onColumnFiltersChange: setColumnFilters,
         initialState: { pagination: { pageSize: 8 } },
     });
-
-    const handleTypeFilter = (value: string) => {
-        setTypeFilter(value);
-        if (value === 'all') {
-            table.getColumn('type')?.setFilterValue(undefined);
-        } else {
-            table.getColumn('type')?.setFilterValue(value);
-        }
-    };
 
     const { pageIndex, pageSize } = table.getState().pagination;
     const totalRows = table.getFilteredRowModel().rows.length;
@@ -93,38 +71,17 @@ export function DataTable<TData, TValue>({
         <div className="space-y-4">
             {/* ── Toolbar ── */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-                {/* Search */}
                 <div className="relative flex-1 min-w-0">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-zinc-500 pointer-events-none" />
                     <Input
-                        placeholder="Search publications…"
+                        placeholder="Search projects…"
                         value={globalFilter ?? ''}
                         onChange={(e) => setGlobalFilter(String(e.target.value))}
                         className="pl-9 h-9 bg-zinc-900 border-zinc-800 text-zinc-100 placeholder:text-zinc-600
-                                   focus-visible:ring-amber-500/30 focus-visible:border-amber-500/40 text-sm w-full sm:max-w-xs"
+                       focus-visible:ring-amber-500/30 focus-visible:border-amber-500/40 text-sm w-full sm:max-w-xs"
                     />
                 </div>
-
-                {/* Type filter */}
-                <Select value={typeFilter} onValueChange={handleTypeFilter}>
-                    <SelectTrigger className="h-9 w-full sm:w-44 bg-zinc-900 border-zinc-800 text-zinc-300 text-sm focus:ring-amber-500/30">
-                        <SelectValue placeholder="All types" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-zinc-900 border-zinc-800 text-zinc-100">
-                        {PUBLICATION_TYPES.map((t) => (
-                            <SelectItem
-                                key={t}
-                                value={t}
-                                className="text-zinc-300 focus:bg-zinc-800 focus:text-zinc-100 capitalize"
-                            >
-                                {t === 'all' ? 'All types' : t}
-                            </SelectItem>
-                        ))}
-                    </SelectContent>
-                </Select>
-
-                {/* Row count */}
-                <span className="text-xs text-zinc-600 whitespace-nowrap shrink-0 ml-auto sm:ml-0">
+                <span className="text-xs text-zinc-600 whitespace-nowrap ml-auto sm:ml-0">
                     {totalRows} result{totalRows !== 1 ? 's' : ''}
                 </span>
             </div>
@@ -139,16 +96,10 @@ export function DataTable<TData, TValue>({
                                 className="border-zinc-800 bg-zinc-900/80 hover:bg-zinc-900/80"
                             >
                                 {headerGroup.headers.map((header) => (
-                                    <TableHead
-                                        key={header.id}
-                                        className="h-10 px-4 text-zinc-500"
-                                    >
+                                    <TableHead key={header.id} className="h-10 px-4 text-zinc-500">
                                         {header.isPlaceholder
                                             ? null
-                                            : flexRender(
-                                                header.column.columnDef.header,
-                                                header.getContext()
-                                            )}
+                                            : flexRender(header.column.columnDef.header, header.getContext())}
                                     </TableHead>
                                 ))}
                             </TableRow>
@@ -161,33 +112,24 @@ export function DataTable<TData, TValue>({
                                 <TableRow
                                     key={row.id}
                                     className={`
-                                        border-zinc-800/60 transition-colors duration-100
-                                        hover:bg-amber-500/[0.04] group
-                                        ${i % 2 === 0 ? 'bg-zinc-950' : 'bg-zinc-900/30'}
-                                    `}
+                    border-zinc-800/60 transition-colors duration-100
+                    hover:bg-amber-500/[0.04]
+                    ${i % 2 === 0 ? 'bg-zinc-950' : 'bg-zinc-900/30'}
+                  `}
                                 >
                                     {row.getVisibleCells().map((cell) => (
-                                        <TableCell
-                                            key={cell.id}
-                                            className="px-4 py-3.5 align-top"
-                                        >
-                                            {flexRender(
-                                                cell.column.columnDef.cell,
-                                                cell.getContext()
-                                            )}
+                                        <TableCell key={cell.id} className="px-4 py-3.5 align-top">
+                                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                         </TableCell>
                                     ))}
                                 </TableRow>
                             ))
                         ) : (
                             <TableRow className="hover:bg-transparent">
-                                <TableCell
-                                    colSpan={columns.length}
-                                    className="h-36 text-center"
-                                >
+                                <TableCell colSpan={columns.length} className="h-36 text-center">
                                     <div className="flex flex-col items-center gap-2 text-zinc-600">
                                         <Search className="h-8 w-8 opacity-30" />
-                                        <p className="text-sm">No publications found.</p>
+                                        <p className="text-sm">No projects found.</p>
                                         {globalFilter && (
                                             <button
                                                 onClick={() => setGlobalFilter('')}
@@ -206,18 +148,18 @@ export function DataTable<TData, TValue>({
 
             {/* ── Pagination ── */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-                {/* Page info */}
                 <p className="text-xs text-zinc-600 order-2 sm:order-1">
                     {totalRows > 0 ? (
-                        <>Showing <span className="text-zinc-400">{from}–{to}</span> of <span className="text-zinc-400">{totalRows}</span></>
+                        <>
+                            Showing <span className="text-zinc-400">{from}–{to}</span> of{' '}
+                            <span className="text-zinc-400">{totalRows}</span>
+                        </>
                     ) : 'No results'}
                 </p>
 
-                {/* Controls */}
                 <div className="flex items-center gap-1 order-1 sm:order-2">
                     <Button
-                        variant="ghost"
-                        size="sm"
+                        variant="ghost" size="sm"
                         onClick={() => table.setPageIndex(0)}
                         disabled={!table.getCanPreviousPage()}
                         className="h-8 w-8 p-0 text-zinc-500 hover:text-zinc-100 hover:bg-zinc-800 disabled:opacity-25"
@@ -225,8 +167,7 @@ export function DataTable<TData, TValue>({
                         <ChevronsLeft className="h-4 w-4" />
                     </Button>
                     <Button
-                        variant="ghost"
-                        size="sm"
+                        variant="ghost" size="sm"
                         onClick={() => table.previousPage()}
                         disabled={!table.getCanPreviousPage()}
                         className="h-8 w-8 p-0 text-zinc-500 hover:text-zinc-100 hover:bg-zinc-800 disabled:opacity-25"
@@ -234,7 +175,6 @@ export function DataTable<TData, TValue>({
                         <ChevronLeft className="h-4 w-4" />
                     </Button>
 
-                    {/* Page numbers */}
                     <div className="flex items-center gap-1 mx-1">
                         {Array.from({ length: table.getPageCount() }, (_, i) => i)
                             .filter((i) => {
@@ -242,7 +182,8 @@ export function DataTable<TData, TValue>({
                                 return i === 0 || i === table.getPageCount() - 1 || Math.abs(i - cur) <= 1;
                             })
                             .reduce<(number | 'ellipsis')[]>((acc, page, idx, arr) => {
-                                if (idx > 0 && (page as number) - (arr[idx - 1] as number) > 1) acc.push('ellipsis');
+                                if (idx > 0 && (page as number) - (arr[idx - 1] as number) > 1)
+                                    acc.push('ellipsis');
                                 acc.push(page);
                                 return acc;
                             }, [])
@@ -252,8 +193,7 @@ export function DataTable<TData, TValue>({
                                 ) : (
                                     <Button
                                         key={item}
-                                        variant="ghost"
-                                        size="sm"
+                                        variant="ghost" size="sm"
                                         onClick={() => table.setPageIndex(item as number)}
                                         className={`h-8 w-8 p-0 text-xs font-medium transition-all ${table.getState().pagination.pageIndex === item
                                                 ? 'bg-amber-500 text-zinc-950 hover:bg-amber-400 font-bold'
@@ -262,13 +202,12 @@ export function DataTable<TData, TValue>({
                                     >
                                         {(item as number) + 1}
                                     </Button>
-                                )
+                                ),
                             )}
                     </div>
 
                     <Button
-                        variant="ghost"
-                        size="sm"
+                        variant="ghost" size="sm"
                         onClick={() => table.nextPage()}
                         disabled={!table.getCanNextPage()}
                         className="h-8 w-8 p-0 text-zinc-500 hover:text-zinc-100 hover:bg-zinc-800 disabled:opacity-25"
@@ -276,8 +215,7 @@ export function DataTable<TData, TValue>({
                         <ChevronRight className="h-4 w-4" />
                     </Button>
                     <Button
-                        variant="ghost"
-                        size="sm"
+                        variant="ghost" size="sm"
                         onClick={() => table.setPageIndex(table.getPageCount() - 1)}
                         disabled={!table.getCanNextPage()}
                         className="h-8 w-8 p-0 text-zinc-500 hover:text-zinc-100 hover:bg-zinc-800 disabled:opacity-25"
@@ -286,7 +224,6 @@ export function DataTable<TData, TValue>({
                     </Button>
                 </div>
 
-                {/* Rows per page */}
                 <Select
                     value={String(pageSize)}
                     onValueChange={(v) => table.setPageSize(Number(v))}
@@ -295,7 +232,7 @@ export function DataTable<TData, TValue>({
                         <SelectValue />
                     </SelectTrigger>
                     <SelectContent className="bg-zinc-900 border-zinc-800 text-zinc-300">
-                        {[5, 8, 10, 20, 50].map((n) => (
+                        {[5, 8, 10, 20].map((n) => (
                             <SelectItem key={n} value={String(n)} className="text-xs focus:bg-zinc-800">
                                 {n} / page
                             </SelectItem>

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Mail, Download } from "lucide-react";
 import { personalInfo, heroStats } from "@/lib/data";
 import Image from "next/image";
+import Link from "next/link";
 
 /* ─── Scroll-reveal variants (whileInView only — no entrance anim) ── */
 const fadeUp = {
@@ -119,30 +120,29 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.82 }}
             >
-              <a
-                href={personalInfo.orcid}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/publications"
+              
                 className="cta-gold hf-body inline-flex items-center gap-2 px-6 py-3 rounded-md text-sm transition-all hover:-translate-y-0.5 active:translate-y-0"
               >
                 View Research
                 <ArrowUpRight size={14} />
-              </a>
-              <a
-                href={`mailto:${personalInfo.email}`}
+              </Link>
+              <Link
+                href="/#contact"
                 className="cta-ghost hf-body inline-flex items-center gap-2 px-6 py-3 rounded-md text-sm transition-all hover:-translate-y-0.5 active:translate-y-0"
               >
                 <Mail size={14} />
                 Collaborate
-              </a>
-              <a
-                href="/cv.pdf"
+              </Link>
+              <Link
+                href="/CV.pdf"
                 target="_blank"
                 className="cta-ghost hf-body inline-flex items-center gap-2 px-6 py-3 rounded-md text-sm transition-all hover:-translate-y-0.5 active:translate-y-0"
               >
                 <Download size={14} />
                 Download CV
-              </a>
+              </Link>
             </motion.div>
           </div>
 
