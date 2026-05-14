@@ -5,7 +5,6 @@ export const siteSettings = defineType({
   title: "Site Settings",
   type: "document",
   // Singleton — enforced via Studio UI and queries
-  __experimental_actions: ["update", "publish"],
   fields: [
     // ── Personal Info ──────────────────────────────────────────────────────
     defineField({
@@ -90,11 +89,11 @@ export const siteSettings = defineType({
       initialValue: "https://www.linkedin.com/in/avikdasetc",
     }),
     defineField({
-      name: "cvUrl",
-      title: "CV / Resume URL",
-      type: "string",
-      description: "Path to CV file, e.g. /CV.pdf or an external URL",
-      initialValue: "/CV.pdf",
+      name: "cvFile",
+      title: "CV / Resume File",
+      type: "file",
+      options: { accept: ".pdf,application/pdf" },
+      description: "Upload your CV (PDF). Replaces the default public/CV.pdf",
     }),
 
     // ── Profile Image ──────────────────────────────────────────────────────

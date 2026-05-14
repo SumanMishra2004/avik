@@ -6,7 +6,7 @@ import type { SanitySiteSettings, SanityNavLink, SanityTeamMember } from "@/type
 import TeamGrid from "@/components/TeamGrid";
 
 
-export const revalidate = process.env.NODE_ENV === "development" ? 0 : 3600;
+export const revalidate = 3600;
 
 export const metadata = {
   title: "Research Team — Avik Kumar Das",

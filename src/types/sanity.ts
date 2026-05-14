@@ -21,7 +21,7 @@ export interface SanitySiteSettings {
   twitterUrl: string;
   linkedin: string;
   linkedinUrl: string;
-  cvUrl: string;
+  cvUrl?: string;
   profileImage?: SanityImage;
   heroTags: string[];
   heroStats: SanityHeroStat[];

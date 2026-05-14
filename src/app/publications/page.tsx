@@ -5,7 +5,7 @@ import { sanityFetch } from "@/lib/sanity/client";
 import { SITE_SETTINGS_QUERY, NAV_LINKS_QUERY, PUBLICATIONS_QUERY } from "@/lib/sanity/queries";
 import type { SanitySiteSettings, SanityNavLink, SanityPublication } from "@/types/sanity";
 
-export const revalidate = process.env.NODE_ENV === "development" ? 0 : 3600;
+export const revalidate = 3600;
 
 export const metadata = {
   title: "Publications & Patents — Avik Kumar Das",

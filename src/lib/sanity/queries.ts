@@ -5,7 +5,7 @@ export const SITE_SETTINGS_QUERY = groq`
   *[_type == "siteSettings"][0] {
     name, title, tagline, subTagline, bio,
     location, email, phone, orcid,
-    twitter, twitterUrl, linkedin, linkedinUrl, cvUrl,
+    twitter, twitterUrl, linkedin, linkedinUrl, "cvUrl": cvFile.asset->url,
     profileImage { asset->{ url }, alt },
     heroTags,
     heroStats[] { value, label, suffix },

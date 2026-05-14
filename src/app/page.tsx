@@ -28,7 +28,7 @@ import {
 } from "@/lib/data";
 
 // Dev: always fresh (0). Production: ISR every hour (3600).
-export const revalidate = process.env.NODE_ENV === "development" ? 0 : 3600;
+export const revalidate = 3600;
 
 export default async function Home() {
   // Fetch everything in one GROQ round-trip
@@ -57,6 +57,7 @@ export default async function Home() {
       }
     : {
         ...fallbackPersonal,
+        cvUrl: "/CV.pdf",
         profileImage: undefined,
         identityBadges: fallbackBadges,
         footerTagline: undefined,
@@ -73,7 +74,7 @@ export default async function Home() {
 
   const researchInterests = data?.researchInterests?.length
     ? data.researchInterests
-    : fallbackResearch.map((r) => ({ ...r, _id: String(r.id) }));
+    : fallbackResearch.map((r) => ({ ...r, _id: String(r.id), order: r.id }));
 
   const experience = data?.experience?.length
     ? data.experience
