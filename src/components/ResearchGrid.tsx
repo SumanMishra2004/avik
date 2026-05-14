@@ -2,16 +2,9 @@
 
 import { motion } from "framer-motion";
 import {
-  Radio,
-  Waves,
-  Brain,
-  Wifi,
-  Lightbulb,
-  Activity,
-  Mountain,
-  Zap,
+  Radio, Waves, Brain, Wifi, Lightbulb, Activity, Mountain, Zap,
 } from "lucide-react";
-import { researchInterests } from "@/lib/data";
+import type { SanityResearchInterest } from "@/types/sanity";
 
 const ICON_MAP: Record<string, React.ReactNode> = {
   Radio: <Radio size={28} />,
@@ -26,25 +19,21 @@ const ICON_MAP: Record<string, React.ReactNode> = {
 
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
+  visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
 };
 
 const cardVariants = {
   hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeOut" as const },
-  },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
 };
 
-export default function ResearchGrid() {
+interface ResearchGridProps {
+  interests: SanityResearchInterest[];
+}
+
+export default function ResearchGrid({ interests }: ResearchGridProps) {
   return (
     <section id="research" className="py-24 relative">
-      {/* Section background accent */}
       <div className="absolute inset-0 bg-linear-to-b from-transparent via-blue-950/10 to-transparent pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6">
@@ -64,8 +53,7 @@ export default function ResearchGrid() {
             <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#C8A558]" />
           </div>
           <h2 className="section-heading text-4xl md:text-5xl font-bold text-white mb-4">
-            Research{" "}
-            <span className="text-gradient">Interests</span>
+            Research <span className="text-gradient">Interests</span>
           </h2>
           <p className="text-[#94A3B8] text-lg max-w-2xl mx-auto">
             Working at the intersection of cutting-edge communication theory,
@@ -81,21 +69,16 @@ export default function ResearchGrid() {
           viewport={{ once: true, margin: "-50px" }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
         >
-          {researchInterests.map((item) => (
+          {interests.map((item) => (
             <motion.div
-              key={item.id}
+              key={item._id}
               variants={cardVariants}
-              whileHover={{
-                scale: 1.03,
-                boxShadow: "0 0 40px rgba(200,165,88,0.2)",
-              }}
+              whileHover={{ scale: 1.03, boxShadow: "0 0 40px rgba(200,165,88,0.2)" }}
               className="glass-card rounded-2xl p-6 flex flex-col gap-4 cursor-default group transition-all duration-300"
             >
               {/* Icon */}
-              <div
-                className={`w-14 h-14 rounded-xl  bg-[#C8A558] flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}
-              >
-                {ICON_MAP[item.icon]}
+              <div className="w-14 h-14 rounded-xl bg-[#C8A558] flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+                {ICON_MAP[item.icon] ?? <Zap size={28} />}
               </div>
 
               {/* Title */}
@@ -108,7 +91,7 @@ export default function ResearchGrid() {
                 {item.description}
               </p>
 
-              {/* Bottom accent line */}
+              {/* Bottom accent */}
               <div className="h-[2px] w-0 bg-gradient-to-r from-[#C8A558] to-[#C8A558] rounded-full group-hover:w-full transition-all duration-500" />
             </motion.div>
           ))}

@@ -2,12 +2,15 @@
 
 import { motion } from "framer-motion";
 import { MapPin, Calendar } from "lucide-react";
-import { experience } from "@/lib/data";
+import type { SanityExperience } from "@/types/sanity";
 
-export default function ExperienceTimeline() {
+interface ExperienceTimelineProps {
+  experience: SanityExperience[];
+}
+
+export default function ExperienceTimeline({ experience }: ExperienceTimelineProps) {
   return (
     <section id="experience" className="py-24 relative">
-      {/* Background accent */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/10 to-transparent pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-6">
@@ -36,7 +39,6 @@ export default function ExperienceTimeline() {
 
         {/* Timeline */}
         <div className="relative">
-          {/* Central vertical line */}
           <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#C8A558]/80 via-[#C8A558]/40 to-transparent md:-translate-x-px" />
 
           <div className="space-y-8">
@@ -44,7 +46,7 @@ export default function ExperienceTimeline() {
               const isLeft = i % 2 === 0;
               return (
                 <motion.div
-                  key={item.id}
+                  key={item._id}
                   initial={{ opacity: 0, x: isLeft ? -30 : 30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-20px" }}
@@ -53,10 +55,8 @@ export default function ExperienceTimeline() {
                     isLeft ? "md:flex-row" : "md:flex-row-reverse"
                   } pl-20 md:pl-0`}
                 >
-                  {/* Dot on the line */}
-                  <div
-                    className={`absolute left-6 md:left-1/2 top-6 -translate-y-1/2 md:-translate-x-1/2 z-10`}
-                  >
+                  {/* Dot */}
+                  <div className="absolute left-6 md:left-1/2 top-6 -translate-y-1/2 md:-translate-x-1/2 z-10">
                     <motion.div
                       whileInView={{ scale: [0, 1.3, 1] }}
                       viewport={{ once: true }}
@@ -65,16 +65,10 @@ export default function ExperienceTimeline() {
                     />
                   </div>
 
-                  {/* Date Badge (opposite side on desktop) */}
-                  <div
-                    className={`hidden md:flex md:w-5/12 ${
-                      isLeft ? "justify-end" : "justify-start"
-                    } items-start pt-2`}
-                  >
+                  {/* Date Badge */}
+                  <div className={`hidden md:flex md:w-5/12 ${isLeft ? "justify-end" : "justify-start"} items-start pt-2`}>
                     <div className="text-right">
-                      <div className="text-[#C8A558] text-sm hf-mono font-medium">
-                        {item.duration}
-                      </div>
+                      <div className="text-[#C8A558] text-sm hf-mono font-medium">{item.duration}</div>
                       <div className="text-[#64748B] text-xs mt-1">{item.years}</div>
                     </div>
                   </div>
@@ -82,16 +76,11 @@ export default function ExperienceTimeline() {
                   {/* Card */}
                   <div className="md:w-5/12">
                     <motion.div
-                      whileHover={{
-                        y: -2,
-                        boxShadow: "0 0 25px rgba(200,165,88,0.15)",
-                      }}
+                      whileHover={{ y: -2, boxShadow: "0 0 25px rgba(200,165,88,0.15)" }}
                       className="glass-card rounded-2xl p-5 border border-white/5 hover:border-[#C8A558]/20 transition-all duration-300"
                     >
                       <div className="flex items-start justify-between gap-2 mb-2">
-                        <h3 className="hf-display font-bold text-white text-base">
-                          {item.role}
-                        </h3>
+                        <h3 className="hf-display font-bold text-white text-base">{item.role}</h3>
                         {item.isCurrent && (
                           <span className="flex-shrink-0 px-2 py-0.5 rounded-full text-xs font-medium badge-current">
                             CURRENT
@@ -99,9 +88,7 @@ export default function ExperienceTimeline() {
                         )}
                       </div>
                       {item.department && (
-                        <p className="text-[#C8A558]/80 text-xs font-medium mb-1">
-                          {item.department}
-                        </p>
+                        <p className="text-[#C8A558]/80 text-xs font-medium mb-1">{item.department}</p>
                       )}
                       <p className="text-[#94A3B8] text-sm">{item.institution}</p>
                       <div className="flex flex-wrap gap-3 mt-3 text-xs text-[#64748B]">

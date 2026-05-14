@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { technicalSkills, languages, toolChips } from "@/lib/data";
+import type { SanitySkill } from "@/types/sanity";
 
 function SkillBar({ name, level }: { name: string; level: number }) {
   const [animated, setAnimated] = useState(false);
@@ -10,9 +10,7 @@ function SkillBar({ name, level }: { name: string; level: number }) {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setAnimated(true);
-      },
+      ([entry]) => { if (entry.isIntersecting) setAnimated(true); },
       { threshold: 0.5 }
     );
     if (ref.current) observer.observe(ref.current);
@@ -47,10 +45,17 @@ function DotRating({ level }: { level: number }) {
   );
 }
 
-export default function SkillsSection() {
+interface SkillsSectionProps {
+  skills: SanitySkill[];
+  toolChips: string[];
+}
+
+export default function SkillsSection({ skills, toolChips }: SkillsSectionProps) {
+  const technicalSkills = skills.filter((s) => s.category === "technical");
+  const languages = skills.filter((s) => s.category === "language");
+
   return (
     <section id="skills" className="py-24 relative">
-      {/* Background accent */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/10 to-transparent pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6">
@@ -89,7 +94,7 @@ export default function SkillsSection() {
             </h3>
             <div className="space-y-5">
               {technicalSkills.map((skill) => (
-                <SkillBar key={skill.name} name={skill.name} level={skill.level} />
+                <SkillBar key={skill._id} name={skill.name} level={skill.level} />
               ))}
             </div>
           </motion.div>
@@ -110,9 +115,9 @@ export default function SkillsSection() {
               </h3>
               <div className="space-y-4">
                 {languages.map((lang) => (
-                  <div key={lang.name} className="flex items-center justify-between">
+                  <div key={lang._id} className="flex items-center justify-between">
                     <span className="text-[#F1F5F9] text-sm font-medium">{lang.name}</span>
-                    <DotRating level={lang.level} />
+                    <DotRating level={lang.languageLevel ?? lang.level} />
                   </div>
                 ))}
               </div>
@@ -128,7 +133,7 @@ export default function SkillsSection() {
             >
               <h3 className="hf-display font-bold text-xl text-white mb-5 flex items-center gap-2">
                 <span className="w-3 h-3 rounded-full bg-gradient-to-br from-[#C8A558] to-[#E2C07A]" />
-                Tools & Platforms
+                Tools &amp; Platforms
               </h3>
               <div className="flex flex-wrap gap-2">
                 {toolChips.map((tool) => (

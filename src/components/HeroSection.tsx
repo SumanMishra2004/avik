@@ -2,11 +2,10 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight, Mail, Download } from "lucide-react";
-import { personalInfo, heroStats } from "@/lib/data";
+import type { SanitySiteSettings, SanityHeroStat } from "@/types/sanity";
 import Image from "next/image";
 import Link from "next/link";
 
-/* ─── Scroll-reveal variants (whileInView only — no entrance anim) ── */
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
   visible: (d: number = 0) => ({
@@ -21,27 +20,24 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.1 } },
 };
 
-const TAGS = [
-  "Associate Professor",
-  "AI & Machine Learning",
-  "14 Patents",
-];
+interface HeroSectionProps {
+  personalInfo: Pick<
+    SanitySiteSettings,
+    "name" | "bio" | "cvUrl" | "profileImage"
+  >;
+  heroStats: SanityHeroStat[];
+  heroTags: string[];
+}
 
-export default function HeroSection() {
+export default function HeroSection({ personalInfo, heroStats, heroTags }: HeroSectionProps) {
+  const profileImageUrl = personalInfo.profileImage?.asset?.url ?? "/profile.png";
+
   return (
     <>
       <section
         id="hero"
         className="relative min-h-screen flex flex-col lg:gap-8 gap-1 overflow-hidden"
       >
-     
-       
-
-
-        {/* ══════════════════════════════════════════════════
-            TOP BAR
-        ══════════════════════════════════════════════════ */}
-  
         {/* ══════════════════════════════════════════════════
             MAIN HERO GRID
         ══════════════════════════════════════════════════ */}
@@ -67,19 +63,14 @@ export default function HeroSection() {
             <div className="overflow-hidden">
               <motion.h1
                 className="hf-display font-medium leading-[0.86] tracking-[-0.01em] text-white"
-                style={{
-                  fontSize: "clamp(3rem, 7vw, 6.5rem)",
-                }}
+                style={{ fontSize: "clamp(3rem, 7vw, 6.5rem)" }}
                 initial={{ y: 120, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 1, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
               >
-                Avik Kumar{" "}
-                <em
-                  className="not-italic"
-                  style={{ color: "#C8A558" }}
-                >
-                  Das
+                {personalInfo.name.split(" ").slice(0, -1).join(" ")}{" "}
+                <em className="not-italic" style={{ color: "#C8A558" }}>
+                  {personalInfo.name.split(" ").slice(-1)}
                 </em>
               </motion.h1>
             </div>
@@ -91,7 +82,7 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.6 }}
             >
-              {TAGS.map((t) => (
+              {heroTags.map((t) => (
                 <span key={t} className="hero-tag hf-mono">
                   {t}
                 </span>
@@ -106,11 +97,7 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.72 }}
             >
-              Pioneering research in Wireless Communication, Underwater Acoustics, LLMs & IoT.
-              Funded by{" "}
-              <span style={{ color: "rgba(255,255,255,0.72)" }}>PRISM (DSIR)</span> &{" "}
-              <span style={{ color: "rgba(255,255,255,0.72)" }}>MeitY TIDE</span> grants.
-              Author of 60+ peer-reviewed papers across IEEE, Springer & Taylor&nbsp;&amp;&nbsp;Francis.
+              {personalInfo.bio}
             </motion.p>
 
             {/* ── CTAs ── */}
@@ -122,7 +109,6 @@ export default function HeroSection() {
             >
               <Link
                 href="/publications"
-              
                 className="cta-gold hf-body inline-flex items-center gap-2 px-6 py-3 rounded-md text-sm transition-all hover:-translate-y-0.5 active:translate-y-0"
               >
                 View Research
@@ -136,7 +122,7 @@ export default function HeroSection() {
                 Collaborate
               </Link>
               <Link
-                href="/CV.pdf"
+                href={personalInfo.cvUrl ?? "/CV.pdf"}
                 target="_blank"
                 className="cta-ghost hf-body inline-flex items-center gap-2 px-6 py-3 rounded-md text-sm transition-all hover:-translate-y-0.5 active:translate-y-0"
               >
@@ -175,8 +161,8 @@ export default function HeroSection() {
                 }}
               >
                 <Image
-                  src="/profile.png"
-                  alt="Dr. Avik Kumar Das — Associate Professor & Researcher"
+                  src={profileImageUrl}
+                  alt={personalInfo.profileImage?.alt ?? `Dr. ${personalInfo.name} — Associate Professor & Researcher`}
                   fill
                   className="object-cover object-top"
                   style={{ filter: "contrast(1.04) saturate(0.92)" }}
@@ -240,7 +226,7 @@ export default function HeroSection() {
         </div>
 
         {/* ══════════════════════════════════════════════════
-            STATS BAR — SCROLL TRIGGERED
+            STATS BAR
         ══════════════════════════════════════════════════ */}
         <div
           className="relative z-10 border-t mt-0"

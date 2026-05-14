@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { logout } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { LogOut, LayoutDashboard, FileText, FolderGit2 } from 'lucide-react';
+import { LogOut, LayoutDashboard, FileText, FolderGit2, Settings } from 'lucide-react';
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   async function handleLogout() {
@@ -41,6 +41,12 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
               <Button variant="ghost" className="w-full justify-start text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800">
                 <FolderGit2 className="mr-2 h-4 w-4" />
                 Projects
+              </Button>
+            </Link>
+            <Link href="/studio">
+              <Button variant="ghost" className="w-full justify-start text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800">
+                <Settings className="mr-2 h-4 w-4" />
+                Content CMS
               </Button>
             </Link>
           </nav>

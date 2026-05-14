@@ -2,9 +2,14 @@
 
 import { motion } from "framer-motion";
 import { MapPin, Calendar, Briefcase } from "lucide-react";
-import { experience, education, personalInfo, identityBadges } from "@/lib/data";
+import type { SanityEducation, SanitySiteSettings } from "@/types/sanity";
 
-export default function AboutSection() {
+interface AboutSectionProps {
+  personalInfo: Pick<SanitySiteSettings, "name" | "bio" | "email" | "phone" | "location" | "identityBadges">;
+  education: SanityEducation[];
+}
+
+export default function AboutSection({ personalInfo, education }: AboutSectionProps) {
   return (
     <section id="about" className="py-24 relative">
       {/* Background accent */}
@@ -71,10 +76,10 @@ export default function AboutSection() {
             <div className="glass-card rounded-2xl p-6 border border-white/5">
               <h4 className="text-white font-semibold text-sm mb-4 flex items-center gap-2">
                 <Briefcase size={15} className="text-[#C8A558]" />
-                Identity & Roles
+                Identity &amp; Roles
               </h4>
               <div className="flex flex-wrap gap-2">
-                {identityBadges.map((badge) => (
+                {personalInfo.identityBadges.map((badge) => (
                   <motion.span
                     key={badge}
                     whileHover={{ scale: 1.05, y: -1 }}
@@ -132,7 +137,7 @@ export default function AboutSection() {
 
               {education.map((edu, i) => (
                 <motion.div
-                  key={edu.id}
+                  key={edu._id}
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}

@@ -1,12 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { awards } from "@/lib/data";
+import type { SanityAward } from "@/types/sanity";
 
-export default function AwardsShelf() {
+interface AwardsShelfProps {
+  awards: SanityAward[];
+}
+
+export default function AwardsShelf({ awards }: AwardsShelfProps) {
   return (
     <section id="awards" className="py-24 relative overflow-hidden">
-      {/* Background accent */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0F172A]/60 to-transparent pointer-events-none" />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#C8A558]/30 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#C8A558]/20 to-transparent" />
@@ -39,7 +42,7 @@ export default function AwardsShelf() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {awards.map((award, i) => (
             <motion.div
-              key={award.id}
+              key={award._id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -51,44 +54,27 @@ export default function AwardsShelf() {
                   : "0 0 30px rgba(200,165,88,0.15)",
               }}
               className={`glass-card rounded-2xl p-6 flex flex-col gap-4 transition-all duration-300 ${
-                award.highlight
-                  ? "border border-yellow-400/30"
-                  : "border border-white/5"
+                award.highlight ? "border border-yellow-400/30" : "border border-white/5"
               }`}
             >
-              {/* Icon */}
               <div className="text-4xl">{award.icon}</div>
-
-              {/* Content */}
               <div className="flex flex-col gap-1">
-                <h3
-                  className={`font-semibold text-sm leading-snug ${
-                    award.highlight ? "text-yellow-300" : "text-white"
-                  }`}
-                >
+                <h3 className={`font-semibold text-sm leading-snug ${award.highlight ? "text-yellow-300" : "text-white"}`}>
                   {award.title}
                 </h3>
                 <p className="text-[#94A3B8] text-xs">{award.issuer}</p>
-                {award.via && (
-                  <p className="text-[#64748B] text-xs">{award.via}</p>
-                )}
+                {award.via && <p className="text-[#64748B] text-xs">{award.via}</p>}
               </div>
-
-              {/* Year Badge */}
               <div className="flex items-center justify-between mt-auto pt-3 border-t border-white/5">
-                <span
-                  className={`text-xs hf-mono font-medium px-2 py-1 rounded-full ${
-                    award.highlight
-                      ? "bg-yellow-400/10 text-yellow-400 border border-yellow-400/30"
-                      : "bg-white/5 text-[#94A3B8] border border-white/10"
-                  }`}
-                >
+                <span className={`text-xs hf-mono font-medium px-2 py-1 rounded-full ${
+                  award.highlight
+                    ? "bg-yellow-400/10 text-yellow-400 border border-yellow-400/30"
+                    : "bg-white/5 text-[#94A3B8] border border-white/10"
+                }`}>
                   {award.year}
                 </span>
                 {award.highlight && (
-                  <span className="text-xs text-yellow-400 font-medium">
-                    Gov. Funded ★
-                  </span>
+                  <span className="text-xs text-yellow-400 font-medium">Gov. Funded ★</span>
                 )}
               </div>
             </motion.div>
@@ -105,13 +91,10 @@ export default function AwardsShelf() {
           style={{ boxShadow: "0 0 40px rgba(200,165,88,0.1)" }}
         >
           <div className="text-2xl mb-2">🏆</div>
-          <p className="text-white font-semibold">
-            Government of India Recognized Researcher
-          </p>
+          <p className="text-white font-semibold">Government of India Recognized Researcher</p>
           <p className="text-[#94A3B8] text-sm mt-2">
-            PRISM grant by DSIR (via IIT Kharagpur) & MeitY TIDE Fund (via SINE
-            IIT Bombay) — awarded for pioneering research in IoT and AI-driven
-            systems.
+            PRISM grant by DSIR (via IIT Kharagpur) &amp; MeitY TIDE Fund (via SINE IIT Bombay) — awarded for
+            pioneering research in IoT and AI-driven systems.
           </p>
         </motion.div>
       </div>
