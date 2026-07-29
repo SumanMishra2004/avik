@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, FileText, Search, ChevronLeft, ChevronRight, BookOpen } from "lucide-react";
+import { ExternalLink, FileText, Search, ChevronLeft, ChevronRight, BookOpen, UserCheck, Mail } from "lucide-react";
 import type { SanityPublication, SanityPublicationsStats } from "@/types/sanity";
 
 type SortKey = "newest" | "oldest" | "az";
@@ -68,9 +68,7 @@ export default function PublicationsSection({ publications, stats }: Publication
 
   return (
     <section id="publications" className="py-16 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#060D1F]/50 to-transparent pointer-events-none" />
-
-      <div className="max-w-6xl mx-auto px-6 relative">
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -80,19 +78,19 @@ export default function PublicationsSection({ publications, stats }: Publication
           className="mb-16"
         >
           <div className="flex items-center gap-4 mb-4">
-            <div className="w-12 h-px bg-gradient-to-r from-[#C8A558] to-transparent" />
-            <span className="text-[#C8A558] text-xs hf-mono tracking-widest uppercase">Research Archive</span>
+            <div className="w-12 h-px bg-gradient-to-r from-[#9E7B28] dark:from-[#C8A558] to-transparent" />
+            <span className="text-[#9E7B28] dark:text-[#C8A558] text-xs hf-mono tracking-widest font-semibold uppercase">Research Archive</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Publications & <span className="text-[#C8A558]">Patents</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">
+            Publications & <span className="text-[#9E7B28] dark:text-[#C8A558]">Patents</span>
           </h2>
           
           {/* Minimal Stats Row */}
-          <div className="flex flex-wrap gap-8 text-sm border-y border-white/5 py-4 mt-8">
+          <div className="flex flex-wrap gap-8 text-sm border-y border-slate-200 dark:border-white/10 py-4 mt-8">
             {computedStats.map((s, i) => (
               <div key={i} className="flex items-center gap-2">
-                <span className="text-[#C8A558] font-mono font-bold text-lg">{s.value}</span>
-                <span className="text-[#94A3B8]">{s.label}</span>
+                <span className="text-[#9E7B28] dark:text-[#C8A558] font-mono font-bold text-lg">{s.value}</span>
+                <span className="text-slate-600 dark:text-[#94A3B8] font-medium">{s.label}</span>
               </div>
             ))}
           </div>
@@ -107,8 +105,8 @@ export default function PublicationsSection({ publications, stats }: Publication
                 onClick={() => { setActiveTab(t); setPage(1); }}
                 className={`px-4 py-2 rounded-full text-xs font-medium transition-all duration-300 ${
                   activeTab === t
-                    ? "bg-[#C8A558] text-[#0A0F1E] shadow-lg shadow-[#C8A558]/20"
-                    : "bg-white/5 text-[#94A3B8] hover:bg-white/10 hover:text-white border border-white/5"
+                    ? "bg-[#C8A558] text-slate-950 font-bold shadow-md shadow-[#C8A558]/20"
+                    : "bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-[#94A3B8] hover:bg-slate-200 dark:hover:bg-white/10 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-white/5"
                 }`}
               >
                 {t}
@@ -118,22 +116,22 @@ export default function PublicationsSection({ publications, stats }: Publication
 
           <div className="flex items-center gap-3 w-full lg:w-auto">
             <div className="relative flex-1 lg:w-64">
-              <Search size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#64748B]" />
+              <Search size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-[#64748B]" />
               <input
                 value={search}
                 onChange={(e) => { setSearch(e.target.value); setPage(1); }}
                 placeholder="Search publications..."
-                className="w-full bg-transparent border border-white/10 rounded-full pl-10 pr-4 py-2.5 text-sm text-white placeholder:text-[#64748B] focus:outline-none focus:border-[#C8A558]/50 transition-colors"
+                className="w-full bg-slate-50 dark:bg-transparent border border-slate-200 dark:border-white/10 rounded-full pl-10 pr-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#64748B] focus:outline-none focus:border-[#C8A558] transition-colors"
               />
             </div>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as SortKey)}
-              className="bg-transparent border border-white/10 rounded-full px-4 py-2.5 text-sm text-[#94A3B8] focus:outline-none focus:border-[#C8A558]/50 cursor-pointer appearance-none pr-8"
+              className="bg-slate-50 dark:bg-[#0A0F1E] border border-slate-200 dark:border-white/10 rounded-full px-4 py-2.5 text-sm text-slate-700 dark:text-[#94A3B8] focus:outline-none focus:border-[#C8A558] cursor-pointer"
             >
-              <option value="newest" className="bg-[#0A0F1E]">Newest</option>
-              <option value="oldest" className="bg-[#0A0F1E]">Oldest</option>
-              <option value="az" className="bg-[#0A0F1E]">A-Z</option>
+              <option value="newest">Newest</option>
+              <option value="oldest">Oldest</option>
+              <option value="az">A-Z</option>
             </select>
           </div>
         </div>
@@ -147,7 +145,7 @@ export default function PublicationsSection({ publications, stats }: Publication
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="text-center py-24 text-[#64748B]"
+                className="text-center py-24 text-slate-400 dark:text-[#64748B]"
               >
                 <BookOpen size={48} className="mx-auto mb-4 opacity-20" />
                 <p>No publications found matching your criteria.</p>
@@ -167,44 +165,70 @@ export default function PublicationsSection({ publications, stats }: Publication
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.05 }}
-                    className="group relative flex flex-col md:flex-row gap-6 p-6 md:p-8 rounded-2xl border border-white/5 bg-white/[.02] hover:bg-white/[.04] hover:border-[#C8A558]/30 transition-all duration-300"
+                    className="group relative flex flex-col md:flex-row gap-6 p-6 md:p-8 rounded-2xl border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[.02] hover:border-[#C8A558]/40 shadow-lg shadow-slate-900/5 dark:shadow-none transition-all duration-300"
                   >
                     {/* Left meta info */}
-                    <div className="md:w-1/4 shrink-0 flex flex-row md:flex-col items-center md:items-start justify-between md:justify-start gap-4 md:gap-2 border-b md:border-b-0 md:border-r border-white/5 pb-4 md:pb-0 md:pr-6">
-                      <div className="text-2xl md:text-3xl font-display font-bold text-[#C8A558]/80 group-hover:text-[#C8A558] transition-colors">
+                    <div className="md:w-1/4 shrink-0 flex flex-row md:flex-col items-center md:items-start justify-between md:justify-start gap-4 md:gap-2 border-b md:border-b-0 md:border-r border-slate-200 dark:border-white/5 pb-4 md:pb-0 md:pr-6">
+                      <div className="text-2xl md:text-3xl font-display font-bold text-[#9E7B28] dark:text-[#C8A558]">
                         {pub.year}
                       </div>
-                      <div className="px-3 py-1 rounded-full text-[10px] uppercase tracking-wider font-mono border border-white/10 text-[#94A3B8] bg-white/5 group-hover:border-[#C8A558]/30 transition-colors">
+                      <div className="px-3 py-1 rounded-full text-[10px] uppercase tracking-wider font-mono border border-slate-200 dark:border-white/10 text-slate-600 dark:text-[#94A3B8] bg-slate-50 dark:bg-white/5">
                         {pub.type}
                       </div>
                     </div>
 
                     {/* Main content */}
                     <div className="md:w-3/4 flex flex-col justify-center">
-                      <h3 className="text-lg md:text-xl font-bold text-white group-hover:text-[#C8A558] transition-colors leading-snug mb-3">
+                      <h3 className="text-lg md:text-xl font-bold text-slate-900 dark:text-white group-hover:text-[#9E7B28] dark:group-hover:text-[#C8A558] transition-colors leading-snug mb-2">
                         {pub.title}
                       </h3>
                       
-                      <div className="mb-4">
-                        <div className="text-sm text-[#E2C07A] font-medium mb-1.5">{pub.publisher}</div>
+                      <div className="mb-3">
+                        <div className="text-sm text-[#9E7B28] dark:text-[#E2C07A] font-semibold mb-1">{pub.publisher}</div>
                         {pub.authors && pub.authors.length > 0 && (
-                          <div className="text-sm text-[#94A3B8] opacity-90 leading-relaxed">
+                          <div className="text-sm text-slate-600 dark:text-[#94A3B8] leading-relaxed">
+                            <span className="font-semibold text-slate-800 dark:text-white/80 mr-1">Authors:</span>
                             {pub.authors.join(", ")}
                           </div>
                         )}
                       </div>
 
+                      {/* Corresponding Authors */}
+                      {pub.correspondingAuthors && pub.correspondingAuthors.length > 0 && (
+                        <div className="mb-4 p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10">
+                          <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-[#9E7B28] dark:text-[#C8A558] uppercase tracking-wider mb-1.5">
+                            <UserCheck size={13} />
+                            Corresponding Author(s)
+                          </div>
+                          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs">
+                            {pub.correspondingAuthors.map((ca, idx) => (
+                              <div key={idx} className="flex items-center gap-1.5">
+                                <span className="font-medium text-slate-900 dark:text-white">{ca.name}</span>
+                                {ca.affiliation && (
+                                  <span className="text-slate-500 dark:text-white/40 text-[11px]">({ca.affiliation})</span>
+                                )}
+                                {ca.email && (
+                                  <a href={`mailto:${ca.email}`} className="text-[#9E7B28] dark:text-[#C8A558] inline-flex items-center gap-0.5 hover:underline font-medium text-[11px]">
+                                    <Mail size={11} /> {ca.email}
+                                  </a>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
                       {pub.description && (
-                        <p className="text-[#64748B] text-sm line-clamp-2 mb-4 group-hover:text-[#94A3B8] transition-colors">
+                        <p className="text-slate-600 dark:text-[#64748B] text-sm line-clamp-2 mb-4 group-hover:text-slate-800 dark:group-hover:text-[#94A3B8] transition-colors">
                           {pub.description}
                         </p>
                       )}
 
-                      <div className="flex flex-wrap items-center justify-between gap-4 mt-auto pt-4 border-t border-white/5">
+                      <div className="flex flex-wrap items-center justify-between gap-4 mt-auto pt-4 border-t border-slate-200 dark:border-white/5">
                         {/* Keywords */}
                         <div className="flex flex-wrap gap-2">
-                          {pub.keywords?.slice(0, 3).map((k, ki) => (
-                            <span key={ki} className="text-[10px] text-[#64748B] uppercase tracking-wider">
+                          {pub.keywords?.slice(0, 4).map((k, ki) => (
+                            <span key={ki} className="text-[10px] text-slate-500 dark:text-[#64748B] uppercase tracking-wider font-mono">
                               #{k}
                             </span>
                           ))}
@@ -213,12 +237,12 @@ export default function PublicationsSection({ publications, stats }: Publication
                         {/* Action Links */}
                         <div className="flex items-center gap-4">
                           {pub.doi && (
-                            <a href={pub.doi} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs font-medium text-[#C8A558] hover:text-white transition-colors">
+                            <a href={pub.doi} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs font-semibold text-[#9E7B28] dark:text-[#C8A558] hover:underline transition-colors">
                               <ExternalLink size={14} /> DOI / Link
                             </a>
                           )}
                           {pub.pdfUrl && (
-                            <a href={pub.pdfUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs font-medium text-[#C8A558] hover:text-white transition-colors">
+                            <a href={pub.pdfUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs font-semibold text-[#9E7B28] dark:text-[#C8A558] hover:underline transition-colors">
                               <FileText size={14} /> PDF
                             </a>
                           )}
@@ -235,17 +259,17 @@ export default function PublicationsSection({ publications, stats }: Publication
         {/* Pagination */}
         {totalPages > 1 && (
           <div className="flex items-center justify-center gap-2 mt-12">
-            <button onClick={() => goPage(safePage - 1)} disabled={safePage === 1} className="w-10 h-10 flex items-center justify-center rounded-full border border-white/10 text-[#94A3B8] hover:bg-white/5 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all">
+            <button onClick={() => goPage(safePage - 1)} disabled={safePage === 1} className="w-10 h-10 flex items-center justify-center rounded-full border border-slate-200 dark:border-white/10 text-slate-600 dark:text-[#94A3B8] hover:bg-slate-100 dark:hover:bg-white/5 disabled:opacity-30 disabled:cursor-not-allowed transition-all">
               <ChevronLeft size={16} />
             </button>
             <div className="flex items-center gap-1 px-4">
               {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
-                <button key={n} onClick={() => goPage(n)} className={`w-8 h-8 rounded-full text-sm font-medium transition-all ${safePage === n ? "bg-[#C8A558] text-[#0A0F1E]" : "text-[#64748B] hover:text-white hover:bg-white/5"}`}>
+                <button key={n} onClick={() => goPage(n)} className={`w-8 h-8 rounded-full text-sm font-medium transition-all ${safePage === n ? "bg-[#C8A558] text-slate-950 font-bold" : "text-slate-600 dark:text-[#64748B] hover:bg-slate-100 dark:hover:bg-white/5"}`}>
                   {n}
                 </button>
               ))}
             </div>
-            <button onClick={() => goPage(safePage + 1)} disabled={safePage === totalPages} className="w-10 h-10 flex items-center justify-center rounded-full border border-white/10 text-[#94A3B8] hover:bg-white/5 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all">
+            <button onClick={() => goPage(safePage + 1)} disabled={safePage === totalPages} className="w-10 h-10 flex items-center justify-center rounded-full border border-slate-200 dark:border-white/10 text-slate-600 dark:text-[#94A3B8] hover:bg-slate-100 dark:hover:bg-white/5 disabled:opacity-30 disabled:cursor-not-allowed transition-all">
               <ChevronRight size={16} />
             </button>
           </div>

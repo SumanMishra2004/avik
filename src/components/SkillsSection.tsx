@@ -20,10 +20,10 @@ function SkillBar({ name, level }: { name: string; level: number }) {
   return (
     <div ref={ref} className="space-y-2">
       <div className="flex justify-between items-center">
-        <span className="text-white text-sm font-medium">{name}</span>
-        <span className="text-[#C8A558] text-xs hf-mono">{level}%</span>
+        <span className="text-slate-900 dark:text-white text-sm font-semibold">{name}</span>
+        <span className="text-[#9E7B28] dark:text-[#C8A558] text-xs hf-mono font-bold">{level}%</span>
       </div>
-      <div className="h-2 rounded-full bg-white/5 overflow-hidden">
+      <div className="h-2.5 rounded-full bg-slate-100 dark:bg-white/5 overflow-hidden border border-slate-200 dark:border-white/5">
         <motion.div
           className="h-full rounded-full progress-bar-fill"
           initial={{ width: 0 }}
@@ -56,9 +56,7 @@ export default function SkillsSection({ skills, toolChips }: SkillsSectionProps)
 
   return (
     <section id="skills" className="py-24 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/10 to-transparent pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -68,13 +66,13 @@ export default function SkillsSection({ skills, toolChips }: SkillsSectionProps)
           className="text-center mb-16"
         >
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#C8A558]" />
-            <span className="text-[#C8A558] text-sm hf-mono font-medium tracking-widest uppercase">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#9E7B28] dark:to-[#C8A558]" />
+            <span className="text-[#9E7B28] dark:text-[#C8A558] text-sm hf-mono font-semibold tracking-widest uppercase">
               Expertise
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#C8A558]" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#9E7B28] dark:to-[#C8A558]" />
           </div>
-          <h2 className="section-heading text-4xl md:text-5xl font-bold text-white">
+          <h2 className="section-heading text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">
             Skills &amp; <span className="text-gradient">Expertise</span>
           </h2>
         </motion.div>
@@ -86,10 +84,10 @@ export default function SkillsSection({ skills, toolChips }: SkillsSectionProps)
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="glass-card rounded-2xl p-8 border border-white/5"
+            className="rounded-2xl p-8 border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[.02] shadow-xl shadow-slate-900/5 dark:shadow-none"
           >
-            <h3 className="hf-display font-bold text-xl text-white mb-6 flex items-center gap-2">
-              <span className="w-3 h-3 rounded-full bg-gradient-to-br from-[#C8A558] to-[#C8A558]" />
+            <h3 className="hf-display font-bold text-xl text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+              <span className="w-3 h-3 rounded-full bg-[#C8A558]" />
               Technical Skills
             </h3>
             <div className="space-y-5">
@@ -107,16 +105,16 @@ export default function SkillsSection({ skills, toolChips }: SkillsSectionProps)
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="glass-card rounded-2xl p-8 border border-white/5"
+              className="rounded-2xl p-8 border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[.02] shadow-xl shadow-slate-900/5 dark:shadow-none"
             >
-              <h3 className="hf-display font-bold text-xl text-white mb-6 flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-gradient-to-br from-[#C8A558] to-[#E2C07A]" />
+              <h3 className="hf-display font-bold text-xl text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+                <span className="w-3 h-3 rounded-full bg-[#C8A558]" />
                 Languages
               </h3>
               <div className="space-y-4">
                 {languages.map((lang) => (
                   <div key={lang._id} className="flex items-center justify-between">
-                    <span className="text-[#F1F5F9] text-sm font-medium">{lang.name}</span>
+                    <span className="text-slate-800 dark:text-[#F1F5F9] text-sm font-semibold">{lang.name}</span>
                     <DotRating level={lang.languageLevel ?? lang.level} />
                   </div>
                 ))}
@@ -129,18 +127,18 @@ export default function SkillsSection({ skills, toolChips }: SkillsSectionProps)
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="glass-card rounded-2xl p-8 border border-white/5"
+              className="rounded-2xl p-8 border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[.02] shadow-xl shadow-slate-900/5 dark:shadow-none"
             >
-              <h3 className="hf-display font-bold text-xl text-white mb-5 flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-gradient-to-br from-[#C8A558] to-[#E2C07A]" />
+              <h3 className="hf-display font-bold text-xl text-slate-900 dark:text-white mb-5 flex items-center gap-2">
+                <span className="w-3 h-3 rounded-full bg-[#C8A558]" />
                 Tools &amp; Platforms
               </h3>
               <div className="flex flex-wrap gap-2">
                 {toolChips.map((tool) => (
                   <motion.span
                     key={tool}
-                    whileHover={{ scale: 1.08, y: -2 }}
-                    className="px-3 py-1.5 rounded-full text-xs hf-mono font-medium glass-card border border-white/10 text-[#94A3B8] hover:text-[#C8A558] hover:border-[#C8A558]/40 transition-all duration-200 cursor-default"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    className="px-3 py-1.5 rounded-full text-xs hf-mono font-semibold border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 text-slate-700 dark:text-[#94A3B8] hover:text-[#9E7B28] dark:hover:text-[#C8A558] hover:border-[#C8A558] transition-all duration-200 cursor-default"
                   >
                     {tool}
                   </motion.span>

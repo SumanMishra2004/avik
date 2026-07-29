@@ -24,6 +24,13 @@ export const publication = defineType({
     defineField({ name: "year", title: "Year", type: "string", validation: (r) => r.required() }),
     defineField({ name: "publisher", title: "Publisher / Venue", type: "string", validation: (r) => r.required() }),
     defineField({ name: "authors", title: "Authors", type: "array", of: [{ type: "string" }] }),
+    defineField({
+      name: "correspondingAuthors",
+      title: "Corresponding Author Details",
+      type: "array",
+      of: [{ type: "correspondingAuthor" }],
+      description: "Detailed contact info for corresponding author(s)",
+    }),
     defineField({ name: "description", title: "Abstract / Description", type: "text", rows: 4 }),
     defineField({ name: "keywords", title: "Keywords", type: "array", of: [{ type: "string" }] }),
     defineField({ name: "doi", title: "DOI / Paper URL", type: "url" }),

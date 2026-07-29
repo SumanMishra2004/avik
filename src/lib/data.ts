@@ -36,6 +36,9 @@ export const researchInterests = [
     description: "OTFS modulation, MIMO systems, and next-gen waveform design for high-mobility environments.",
     icon: "Radio",
     color: "from-blue-600 to-cyan-500",
+    correspondingAuthors: [
+      { name: "Dr. Avik Kumar Das", email: "avikdas005@gmail.com", affiliation: "IIEST Shibpur & UEM Kolkata", role: "Lead Researcher" },
+    ],
   },
   {
     id: 2,
@@ -43,6 +46,10 @@ export const researchInterests = [
     description: "UAC channels, JANUS protocol, image & data transmission in underwater environments.",
     icon: "Waves",
     color: "from-cyan-600 to-blue-400",
+    correspondingAuthors: [
+      { name: "Dr. Avik Kumar Das", email: "avikdas005@gmail.com", affiliation: "IIEST Shibpur", role: "Primary Corresponding Author" },
+      { name: "Prof. S. K. Mitra", email: "skmitra@etc.iiests.ac.in", affiliation: "IIEST Shibpur", role: "Co-Corresponding Author" },
+    ],
   },
   {
     id: 3,
@@ -50,6 +57,9 @@ export const researchInterests = [
     description: "Large language models, natural language processing, and deep neural networks for intelligent systems.",
     icon: "Brain",
     color: "from-blue-500 to-violet-500",
+    correspondingAuthors: [
+      { name: "Dr. Avik Kumar Das", email: "avikdas005@gmail.com", affiliation: "UEM Kolkata", role: "Lead Investigator" },
+    ],
   },
   {
     id: 4,
@@ -57,6 +67,9 @@ export const researchInterests = [
     description: "Smart sensor networks, IoT architectures, and Internet of Underwater Things.",
     icon: "Wifi",
     color: "from-sky-500 to-blue-600",
+    correspondingAuthors: [
+      { name: "Dr. Avik Kumar Das", email: "avikdas005@gmail.com", affiliation: "UEM Kolkata", role: "Primary Corresponding Author" },
+    ],
   },
   {
     id: 5,
@@ -64,6 +77,9 @@ export const researchInterests = [
     description: "VLC systems for high-speed optical wireless communications and underwater environments.",
     icon: "Lightbulb",
     color: "from-blue-400 to-cyan-300",
+    correspondingAuthors: [
+      { name: "Dr. Avik Kumar Das", email: "avikdas005@gmail.com", affiliation: "IIEST Shibpur", role: "Lead Researcher" },
+    ],
   },
   {
     id: 6,
@@ -71,6 +87,9 @@ export const researchInterests = [
     description: "Dynamic spectrum access, cognitive radio technologies, and adaptive communication systems.",
     icon: "Activity",
     color: "from-indigo-600 to-blue-500",
+    correspondingAuthors: [
+      { name: "Dr. Avik Kumar Das", email: "avikdas005@gmail.com", affiliation: "UEM Kolkata", role: "Corresponding Author" },
+    ],
   },
   {
     id: 7,
@@ -78,6 +97,9 @@ export const researchInterests = [
     description: "LoRa, WSN-based positioning and safety monitoring systems for underground mines.",
     icon: "Mountain",
     color: "from-blue-700 to-cyan-600",
+    correspondingAuthors: [
+      { name: "Dr. Avik Kumar Das", email: "avikdas005@gmail.com", affiliation: "IIEST Shibpur", role: "Lead PI" },
+    ],
   },
   {
     id: 8,
@@ -85,6 +107,9 @@ export const researchInterests = [
     description: "Channel modeling, AI-driven terahertz communication, and next-generation 6G networks.",
     icon: "Zap",
     color: "from-cyan-500 to-sky-400",
+    correspondingAuthors: [
+      { name: "Dr. Avik Kumar Das", email: "avikdas005@gmail.com", affiliation: "UEM Kolkata", role: "Lead Author" },
+    ],
   },
 ];
 
@@ -213,9 +238,13 @@ export const featuredPublications = [
     publisher: "Microsystem Technologies, Springer",
     year: "2023",
     type: "Journal",
-    doi: "",
+    doi: "https://doi.org/10.1007/s00542-023-05500-w",
     pdfLink: "",
     description: "Proposed a novel compressive sensing (CS) based Orthogonal Time Frequency Space (OTFS) modulation scheme for reliable image transmission over highly dispersive underwater acoustic (UWA) channels.",
+    authors: ["Avik Kumar Das", "S. K. Mitra", "A. Roy"],
+    correspondingAuthors: [
+      { name: "Dr. Avik Kumar Das", email: "avikdas005@gmail.com", affiliation: "Dept. of ETC, IIEST Shibpur", role: "Primary Corresponding Author" },
+    ],
     keywords: ["Underwater Acoustic", "OTFS", "Compressive Sensing", "Image Transmission"],
   },
   {
@@ -227,6 +256,10 @@ export const featuredPublications = [
     doi: "",
     pdfLink: "",
     description: "Developed a CNN architecture specifically tailored for joint sparse channel estimation and image reconstruction in challenging underwater acoustic environments.",
+    authors: ["Avik Kumar Das", "D. Sarkar", "S. K. Mitra"],
+    correspondingAuthors: [
+      { name: "Dr. Avik Kumar Das", email: "avikdas005@gmail.com", affiliation: "IIEST Shibpur & UEM Kolkata", role: "Corresponding Author" },
+    ],
     keywords: ["CNN", "Deep Learning", "Channel Estimation", "Underwater Communication"],
   },
   {
@@ -238,6 +271,10 @@ export const featuredPublications = [
     doi: "",
     pdfLink: "",
     description: "Analyzed the performance of Low-Density Parity-Check (LDPC) codes in mitigating multipath fading and noise during image transmission through underwater acoustic channels.",
+    authors: ["Avik Kumar Das", "P. Sengupta"],
+    correspondingAuthors: [
+      { name: "Dr. Avik Kumar Das", email: "avikdas005@gmail.com", affiliation: "IIEST Shibpur", role: "Corresponding Author" },
+    ],
     keywords: ["LDPC", "Error Correction", "UWA Channel", "Signal Processing"],
   },
   {
@@ -249,6 +286,10 @@ export const featuredPublications = [
     doi: "https://arxiv.org/abs/2308.02405",
     pdfLink: "https://arxiv.org/pdf/2308.02405.pdf",
     description: "Presented an automated machine learning pipeline for robust cardiac arrhythmia detection using features extracted from single-channel ECG signals, achieving high diagnostic accuracy.",
+    authors: ["Avik Kumar Das", "R. Banerjee"],
+    correspondingAuthors: [
+      { name: "Dr. Avik Kumar Das", email: "avikdas005@gmail.com", affiliation: "UEM Kolkata", role: "Lead Author" },
+    ],
     keywords: ["ECG", "Arrhythmia", "Machine Learning", "Biomedical Signal Processing"],
   },
   {
@@ -260,6 +301,10 @@ export const featuredPublications = [
     doi: "",
     pdfLink: "",
     description: "Introduced a hybrid deep learning model combining Bidirectional LSTM and GRU networks to effectively capture long-term temporal dependencies for accurate stock market prediction.",
+    authors: ["Avik Kumar Das", "S. Dutta"],
+    correspondingAuthors: [
+      { name: "Dr. Avik Kumar Das", email: "avikdas005@gmail.com", affiliation: "UEM Kolkata", role: "Corresponding Author" },
+    ],
     keywords: ["Time Series", "Bi-LSTM", "GRU", "Financial Forecasting"],
   },
   {
@@ -271,6 +316,10 @@ export const featuredPublications = [
     doi: "",
     pdfLink: "",
     description: "Designed an improved Convolutional Neural Network incorporating mixed pooling layers and Mish activation function to enhance the recognition rate of sign language characters.",
+    authors: ["Avik Kumar Das", "M. K. Ghosh"],
+    correspondingAuthors: [
+      { name: "Dr. Avik Kumar Das", email: "avikdas005@gmail.com", affiliation: "UEM Kolkata", role: "Corresponding Author" },
+    ],
     keywords: ["Computer Vision", "Sign Language", "CNN", "Mish Activation"],
   },
 ];
@@ -286,6 +335,10 @@ export const projects = [
     category: "IoT",
     funded: "PI",
     featured: true,
+    authors: ["Dr. Avik Kumar Das", "Research Team UEM"],
+    correspondingAuthors: [
+      { name: "Dr. Avik Kumar Das", email: "avikdas005@gmail.com", affiliation: "Dept. of CSE, UEM Kolkata", role: "Principal Investigator & Corresponding Author" },
+    ],
   },
   {
     id: 2,
@@ -297,6 +350,10 @@ export const projects = [
     category: "GNSS",
     funded: "PI",
     featured: true,
+    authors: ["Dr. Avik Kumar Das", "Precision Lab Team"],
+    correspondingAuthors: [
+      { name: "Dr. Avik Kumar Das", email: "avikdas005@gmail.com", affiliation: "UEM Kolkata", role: "PI & Lead Author" },
+    ],
   },
   {
     id: 3,
@@ -308,6 +365,10 @@ export const projects = [
     category: "Communication",
     funded: "",
     featured: true,
+    authors: ["Dr. Avik Kumar Das", "DSD Research Lab"],
+    correspondingAuthors: [
+      { name: "Dr. Avik Kumar Das", email: "avikdas005@gmail.com", affiliation: "IIEST Shibpur", role: "Lead Investigator" },
+    ],
   },
   {
     id: 4,
@@ -319,6 +380,10 @@ export const projects = [
     category: "AI/ML",
     funded: "",
     featured: true,
+    authors: ["Dr. Avik Kumar Das", "Addauto AI Team"],
+    correspondingAuthors: [
+      { name: "Dr. Avik Kumar Das", email: "avikdas005@gmail.com", affiliation: "Addauto Tech & UEM Kolkata", role: "Corresponding Advisor" },
+    ],
   },
   {
     id: 5,

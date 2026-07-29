@@ -54,19 +54,23 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+import { ThemeProvider } from "@/components/ThemeProvider";
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="h-full antialiased">
+    <html lang="en" className="h-full antialiased" suppressHydrationWarning>
       <head>
         <link
           href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-full bg-[#0C0E13] text-white hf-body">
-        {children}
+      <body className="min-h-full bg-background text-foreground hf-body transition-colors duration-300">
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true}>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

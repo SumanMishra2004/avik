@@ -19,6 +19,13 @@ export const researchInterest = defineType({
       validation: (r) => r.required(),
     }),
     defineField({
+      name: "correspondingAuthors",
+      title: "Corresponding Author Details",
+      type: "array",
+      of: [{ type: "correspondingAuthor" }],
+      description: "Corresponding lead authors for this research area",
+    }),
+    defineField({
       name: "icon",
       title: "Lucide Icon Name",
       type: "string",

@@ -17,7 +17,7 @@ function SocialButton({ href, icon, label }: { href: string; icon: React.ReactNo
       rel="noopener noreferrer"
       aria-label={label}
       whileHover={{ scale: 1.15, y: -1 }}
-      className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-[#94A3B8] hover:text-[#C8A558] hover:border-[#C8A558]/40 hover:bg-[#C8A558]/5 transition-all duration-200"
+      className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-600 dark:text-[#94A3B8] hover:text-[#9E7B28] dark:hover:text-[#C8A558] hover:border-[#C8A558] transition-all duration-200"
     >
       {icon}
     </motion.a>
@@ -32,10 +32,10 @@ function EmptyState() {
       className="text-center py-24 col-span-full"
     >
       <div className="text-5xl mb-4">🎓</div>
-      <p className="text-white font-semibold text-lg mb-2">Team members coming soon</p>
-      <p className="text-[#64748B] text-sm max-w-md mx-auto">
+      <p className="text-slate-900 dark:text-white font-bold text-lg mb-2">Team members coming soon</p>
+      <p className="text-slate-500 dark:text-[#64748B] text-sm max-w-md mx-auto">
         Research scholars and collaborators will be listed here. Add team members via the{" "}
-        <a href="/studio" className="text-[#C8A558] hover:underline">Content CMS</a>.
+        <a href="/studio" className="text-[#9E7B28] dark:text-[#C8A558] underline font-medium">Content CMS</a>.
       </p>
     </motion.div>
   );
@@ -52,16 +52,16 @@ function MemberCard({ member, index }: { member: SanityTeamMember; index: number
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.07 }}
       whileHover={{ y: -4 }}
-      className={`group relative rounded-2xl border bg-white/[.04] p-6 flex flex-col gap-4 transition-all duration-300 ${
+      className={`group relative rounded-2xl border bg-white dark:bg-white/[.04] p-6 flex flex-col gap-4 shadow-xl shadow-slate-900/5 dark:shadow-none transition-all duration-300 ${
         member.isFeatured
-          ? "border-[#C8A558]/25 bg-[#C8A558]/[.03] hover:border-[#C8A558]/50"
-          : "border-white/[.07] hover:border-[#C8A558]/20"
+          ? "border-[#C8A558] bg-amber-500/5 dark:bg-[#C8A558]/[.03]"
+          : "border-slate-200 dark:border-white/[.07] hover:border-[#C8A558]/50"
       }`}
     >
       {/* Featured badge */}
       {member.isFeatured && (
         <div className="absolute top-4 right-4">
-          <span className="text-[10px] hf-mono px-2 py-0.5 rounded-full bg-[#C8A558]/15 text-[#C8A558] border border-[#C8A558]/30 tracking-widest uppercase">
+          <span className="text-[10px] hf-mono px-2 py-0.5 rounded-full bg-[#C8A558]/20 text-[#9E7B28] dark:text-[#C8A558] border border-[#C8A558]/40 tracking-widest font-semibold uppercase">
             Featured
           </span>
         </div>
@@ -70,7 +70,7 @@ function MemberCard({ member, index }: { member: SanityTeamMember; index: number
       {/* Photo + Name */}
       <div className="flex items-center gap-4">
         <div className="relative flex-shrink-0">
-          <div className="w-16 h-16 rounded-xl overflow-hidden border-2 border-white/10 group-hover:border-[#C8A558]/40 transition-colors duration-300">
+          <div className="w-16 h-16 rounded-xl overflow-hidden border-2 border-slate-200 dark:border-white/10 group-hover:border-[#C8A558] transition-colors duration-300">
             {photoUrl ? (
               <Image
                 src={photoUrl}
@@ -80,50 +80,50 @@ function MemberCard({ member, index }: { member: SanityTeamMember; index: number
                 className="w-full h-full object-cover object-top"
               />
             ) : (
-              <div className="w-full h-full bg-gradient-to-br from-[#C8A558]/30 to-[#A68541]/20 flex items-center justify-center text-[#C8A558] font-bold text-lg hf-display">
+              <div className="w-full h-full bg-gradient-to-br from-[#C8A558] to-[#A68541] flex items-center justify-center text-white font-bold text-lg hf-display">
                 {initials}
               </div>
             )}
           </div>
-          {/* Online dot */}
-          <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-[#0C0E13] flex items-center justify-center">
-            <div className="w-2 h-2 rounded-full bg-green-400" />
+          {/* Active dot */}
+          <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-white dark:bg-[#0C0E13] flex items-center justify-center">
+            <div className="w-2 h-2 rounded-full bg-emerald-500" />
           </div>
         </div>
 
         <div className="min-w-0">
-          <h3 className="font-semibold text-white text-sm leading-tight group-hover:text-[#C8A558] transition-colors truncate">
+          <h3 className="font-bold text-slate-900 dark:text-white text-base leading-tight group-hover:text-[#9E7B28] dark:group-hover:text-[#C8A558] transition-colors truncate">
             {member.name}
           </h3>
-          <p className="text-[#C8A558] text-xs font-medium mt-0.5">{member.role}</p>
-          <span className="inline-block mt-1 text-[10px] hf-mono px-2 py-0.5 rounded-full bg-white/[.05] border border-white/[.08] text-[#94A3B8]">
+          <p className="text-[#9E7B28] dark:text-[#C8A558] text-xs font-semibold mt-0.5">{member.role}</p>
+          <span className="inline-block mt-1 text-[10px] hf-mono px-2 py-0.5 rounded-full bg-slate-100 dark:bg-white/[.05] border border-slate-200 dark:border-white/[.08] text-slate-600 dark:text-[#94A3B8]">
             {member.department}
           </span>
         </div>
       </div>
 
       {/* Bio */}
-      <p className="text-[#64748B] text-xs leading-relaxed line-clamp-3 flex-1">
+      <p className="text-slate-600 dark:text-[#94A3B8] text-xs leading-relaxed line-clamp-3 flex-1">
         {member.bio}
       </p>
 
       {/* Meta chips */}
       <div className="flex flex-col gap-1.5">
         {member.researchArea && (
-          <div className="flex items-center gap-2 text-[11px] text-[#94A3B8]">
-            <BookOpen size={11} className="text-[#C8A558] flex-shrink-0" />
+          <div className="flex items-center gap-2 text-[11px] text-slate-600 dark:text-[#94A3B8]">
+            <BookOpen size={13} className="text-[#9E7B28] dark:text-[#C8A558] flex-shrink-0" />
             <span className="truncate">{member.researchArea}</span>
           </div>
         )}
         {member.institution && (
-          <div className="flex items-center gap-2 text-[11px] text-[#94A3B8]">
-            <GraduationCap size={11} className="text-[#C8A558] flex-shrink-0" />
+          <div className="flex items-center gap-2 text-[11px] text-slate-600 dark:text-[#94A3B8]">
+            <GraduationCap size={13} className="text-[#9E7B28] dark:text-[#C8A558] flex-shrink-0" />
             <span className="truncate">{member.institution}</span>
           </div>
         )}
         {member.year && (
-          <div className="flex items-center gap-2 text-[11px] text-[#64748B] hf-mono">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#C8A558]/50 flex-shrink-0" />
+          <div className="flex items-center gap-2 text-[11px] text-slate-500 dark:text-[#64748B] hf-mono">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#C8A558] flex-shrink-0" />
             {member.year}
           </div>
         )}
@@ -131,7 +131,7 @@ function MemberCard({ member, index }: { member: SanityTeamMember; index: number
 
       {/* Social links */}
       {member.socials && (
-        <div className="flex items-center gap-2 pt-3 border-t border-white/[.06]">
+        <div className="flex items-center gap-2 pt-3 border-t border-slate-200 dark:border-white/[.06]">
           {member.socials.twitter && (
             <SocialButton href={member.socials.twitter} icon={<XIcon size={13} />} label="Twitter" />
           )}
@@ -159,9 +159,7 @@ export default function TeamGrid({ members }: TeamGridProps) {
 
   return (
     <section id="team" className="py-12 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0A0F1E]/60 to-transparent pointer-events-none" />
-
-      <div className="max-w-6xl mx-auto px-6 relative">
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 28 }}
@@ -171,16 +169,16 @@ export default function TeamGrid({ members }: TeamGridProps) {
           className="text-center mb-14"
         >
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="h-px w-10 bg-gradient-to-r from-transparent to-[#C8A558]" />
-            <span className="text-[#C8A558] text-[11px] hf-mono tracking-[.18em] uppercase">
+            <div className="h-px w-10 bg-gradient-to-r from-transparent to-[#9E7B28] dark:to-[#C8A558]" />
+            <span className="text-[#9E7B28] dark:text-[#C8A558] text-[11px] hf-mono font-semibold tracking-[.18em] uppercase">
               Research Group
             </span>
-            <div className="h-px w-10 bg-gradient-to-l from-transparent to-[#C8A558]" />
+            <div className="h-px w-10 bg-gradient-to-l from-transparent to-[#9E7B28] dark:to-[#C8A558]" />
           </div>
-          <h1 className="hf-display text-4xl md:text-5xl font-extrabold text-white tracking-tight">
-            Meet the <span className="text-[#C8A558]">Team</span>
+          <h1 className="hf-display text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            Meet the <span className="text-[#9E7B28] dark:text-[#C8A558]">Team</span>
           </h1>
-          <p className="text-[#64748B] text-[15px] mt-4 max-w-xl mx-auto">
+          <p className="text-slate-600 dark:text-[#94A3B8] text-[15px] mt-4 max-w-xl mx-auto">
             PhD scholars, research assistants, and collaborators advancing next-generation communication and AI research.
           </p>
         </motion.div>
@@ -194,7 +192,7 @@ export default function TeamGrid({ members }: TeamGridProps) {
             {/* Featured members — larger cards */}
             {featured.length > 0 && (
               <div className="mb-8">
-                <p className="text-[11px] hf-mono text-[#475569] tracking-widest uppercase mb-4">
+                <p className="text-[11px] hf-mono text-[#9E7B28] dark:text-[#C8A558] font-bold tracking-widest uppercase mb-4">
                   Featured Researchers
                 </p>
                 <div className={`grid gap-5 ${featured.length === 1 ? "grid-cols-1 max-w-sm" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"}`}>
@@ -209,7 +207,7 @@ export default function TeamGrid({ members }: TeamGridProps) {
             {rest.length > 0 && (
               <div>
                 {featured.length > 0 && (
-                  <p className="text-[11px] hf-mono text-[#475569] tracking-widest uppercase mb-4">
+                  <p className="text-[11px] hf-mono text-slate-500 dark:text-[#64748B] font-bold tracking-widest uppercase mb-4">
                     Research Scholars & Collaborators
                   </p>
                 )}
@@ -233,7 +231,7 @@ export default function TeamGrid({ members }: TeamGridProps) {
         >
           <a
             href="/#contact"
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-xl border border-[#C8A558]/40 text-[#C8A558] hf-display font-bold text-[14px] tracking-wide hover:bg-[#C8A558]/10 hover:border-[#C8A558]/70 transition-all duration-200"
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-xl border border-[#C8A558] text-slate-900 dark:text-[#C8A558] bg-white dark:bg-transparent hf-display font-bold text-[14px] tracking-wide hover:bg-[#C8A558] hover:text-white dark:hover:bg-[#C8A558] dark:hover:text-slate-950 transition-all duration-200 shadow-md"
           >
             <Mail size={15} />
             Interested in joining? Get in touch

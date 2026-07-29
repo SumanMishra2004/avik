@@ -50,6 +50,14 @@ export interface SanityCtaButton {
   icon?: string;
 }
 
+export interface SanityCorrespondingAuthor {
+  name: string;
+  email?: string;
+  affiliation?: string;
+  role?: string;
+  phone?: string;
+}
+
 export interface SanityResearchInterest {
   _id: string;
   title: string;
@@ -57,6 +65,7 @@ export interface SanityResearchInterest {
   icon: string;
   color: string;
   order: number;
+  correspondingAuthors?: SanityCorrespondingAuthor[];
 }
 
 export interface SanityExperience {
@@ -147,6 +156,7 @@ export interface SanityProject {
   institution?: string;
   duration?: string;
   authors?: string[];
+  correspondingAuthors?: SanityCorrespondingAuthor[];
   funded?: string;
   techStack?: string[];
   githubUrl?: string;
@@ -162,6 +172,7 @@ export interface SanityPublication {
   year: string;
   publisher: string;
   authors?: string[];
+  correspondingAuthors?: SanityCorrespondingAuthor[];
   description?: string;
   keywords?: string[];
   doi?: string;

@@ -26,11 +26,11 @@ export default async function PublicationsPage() {
   } : undefined;
 
   return (
-    <main className="min-h-screen bg-[#0C0E13] text-white overflow-x-hidden grain relative">
-      <div className="hairline-grid absolute inset-0 z-0 pointer-events-none" />
+    <main className="min-h-screen bg-background text-foreground overflow-x-hidden relative transition-colors duration-300">
+      <div className="hairline-grid absolute inset-0 z-0 pointer-events-none opacity-40 dark:opacity-100" />
       <div className="relative z-10">
         <Navbar navLinks={navLinks} />
-        <div className="pt-24">
+        <div className="pt-28 lg:pt-32">
           <PublicationsSection
             publications={publications}
             stats={settings?.publicationsStats}

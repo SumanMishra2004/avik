@@ -37,6 +37,13 @@ export const project = defineType({
     defineField({ name: "institution", title: "Institution", type: "string" }),
     defineField({ name: "duration", title: "Duration", type: "string", description: "e.g. 2022 – Present" }),
     defineField({ name: "authors", title: "Authors / Collaborators", type: "array", of: [{ type: "string" }] }),
+    defineField({
+      name: "correspondingAuthors",
+      title: "Corresponding Author Details",
+      type: "array",
+      of: [{ type: "correspondingAuthor" }],
+      description: "Detailed contact info for corresponding author(s)",
+    }),
     defineField({ name: "funded", title: "Funded By (leave blank if not funded)", type: "string", description: "e.g. DSIR · Govt. of India" }),
     defineField({ name: "techStack", title: "Tech Stack", type: "array", of: [{ type: "string" }] }),
     defineField({ name: "githubUrl", title: "GitHub URL", type: "url" }),

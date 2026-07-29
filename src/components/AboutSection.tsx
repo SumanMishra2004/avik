@@ -12,10 +12,7 @@ interface AboutSectionProps {
 export default function AboutSection({ personalInfo, education }: AboutSectionProps) {
   return (
     <section id="about" className="py-24 relative">
-      {/* Background accent */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0F172A]/50 to-transparent pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -25,13 +22,13 @@ export default function AboutSection({ personalInfo, education }: AboutSectionPr
           className="text-center mb-16"
         >
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#C8A558]" />
-            <span className="text-[#C8A558] text-sm hf-mono font-medium tracking-widest uppercase">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#9E7B28] dark:to-[#C8A558]" />
+            <span className="text-[#9E7B28] dark:text-[#C8A558] text-sm hf-mono font-semibold tracking-widest uppercase">
               About Me
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#C8A558]" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#9E7B28] dark:to-[#C8A558]" />
           </div>
-          <h2 className="section-heading text-4xl md:text-5xl font-bold text-white">
+          <h2 className="section-heading text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">
             Who I <span className="text-gradient">Am</span>
           </h2>
         </motion.div>
@@ -46,36 +43,36 @@ export default function AboutSection({ personalInfo, education }: AboutSectionPr
             className="space-y-6"
           >
             {/* Bio card */}
-            <div className="glass-card rounded-2xl p-8 border border-white/5">
+            <div className="rounded-2xl p-8 border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[.02] shadow-xl shadow-slate-900/5 dark:shadow-none">
               <div className="flex items-start gap-4 mb-6">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#C8A558] to-[#C8A558] flex items-center justify-center text-white hf-display font-bold text-xl shadow-[0_0_30px_rgba(200,165,88,0.3)] flex-shrink-0">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#C8A558] to-[#A68541] flex items-center justify-center text-white hf-display font-bold text-xl shadow-lg flex-shrink-0">
                   AKD
                 </div>
                 <div>
-                  <h3 className="hf-display font-bold text-xl text-white">
+                  <h3 className="hf-display font-bold text-xl text-slate-900 dark:text-white">
                     {personalInfo.name}
                   </h3>
-                  <div className="flex items-center gap-2 text-[#94A3B8] text-sm mt-1">
-                    <MapPin size={13} className="text-[#C8A558]" />
+                  <div className="flex items-center gap-2 text-slate-600 dark:text-[#94A3B8] text-sm mt-1">
+                    <MapPin size={14} className="text-[#9E7B28] dark:text-[#C8A558]" />
                     <span>{personalInfo.location}</span>
                   </div>
-                  <div className="mt-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium badge-current">
-                      <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                  <div className="mt-2">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                       Currently Active — UEM Kolkata
                     </span>
                   </div>
                 </div>
               </div>
-              <p className="text-[#94A3B8] leading-relaxed text-sm">
+              <p className="text-slate-600 dark:text-[#94A3B8] leading-relaxed text-sm">
                 {personalInfo.bio}
               </p>
             </div>
 
             {/* Identity Badges */}
-            <div className="glass-card rounded-2xl p-6 border border-white/5">
-              <h4 className="text-white font-semibold text-sm mb-4 flex items-center gap-2">
-                <Briefcase size={15} className="text-[#C8A558]" />
+            <div className="rounded-2xl p-6 border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[.02] shadow-xl shadow-slate-900/5 dark:shadow-none">
+              <h4 className="text-slate-900 dark:text-white font-semibold text-sm mb-4 flex items-center gap-2">
+                <Briefcase size={16} className="text-[#9E7B28] dark:text-[#C8A558]" />
                 Identity &amp; Roles
               </h4>
               <div className="flex flex-wrap gap-2">
@@ -83,7 +80,7 @@ export default function AboutSection({ personalInfo, education }: AboutSectionPr
                   <motion.span
                     key={badge}
                     whileHover={{ scale: 1.05, y: -1 }}
-                    className="px-3 py-1.5 rounded-full text-xs font-medium glass-card border border-white/10 text-[#C8A558] hover:border-[#C8A558]/40 hover:bg-[#C8A558]/5 transition-all duration-200 cursor-default"
+                    className="px-3 py-1.5 rounded-full text-xs font-medium bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[#9E7B28] dark:text-[#C8A558] hover:border-[#C8A558] transition-all duration-200 cursor-default"
                   >
                     {badge}
                   </motion.span>
@@ -92,25 +89,25 @@ export default function AboutSection({ personalInfo, education }: AboutSectionPr
             </div>
 
             {/* Contact chips */}
-            <div className="glass-card rounded-2xl p-6 border border-white/5">
-              <h4 className="text-white font-semibold text-sm mb-4">
+            <div className="rounded-2xl p-6 border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[.02] shadow-xl shadow-slate-900/5 dark:shadow-none">
+              <h4 className="text-slate-900 dark:text-white font-semibold text-sm mb-4">
                 Get In Touch
               </h4>
               <div className="space-y-3">
                 <a
                   href={`mailto:${personalInfo.email}`}
-                  className="flex items-center gap-3 text-[#94A3B8] text-sm hover:text-[#C8A558] transition-colors group"
+                  className="flex items-center gap-3 text-slate-600 dark:text-[#94A3B8] text-sm hover:text-[#9E7B28] dark:hover:text-[#C8A558] transition-colors group"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-[#A68541]/40 border border-blue-700/30 flex items-center justify-center text-[#C8A558] group-hover:bg-blue-800/50 transition-colors">
+                  <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-[#9E7B28] dark:text-[#C8A558] group-hover:bg-[#C8A558]/20 transition-colors font-bold">
                     @
                   </div>
                   <span>{personalInfo.email}</span>
                 </a>
                 <a
                   href={`tel:${personalInfo.phone}`}
-                  className="flex items-center gap-3 text-[#94A3B8] text-sm hover:text-[#C8A558] transition-colors group"
+                  className="flex items-center gap-3 text-slate-600 dark:text-[#94A3B8] text-sm hover:text-[#9E7B28] dark:hover:text-[#C8A558] transition-colors group"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-[#A68541]/40 border border-blue-700/30 flex items-center justify-center text-[#C8A558] text-xs group-hover:bg-blue-800/50 transition-colors">
+                  <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-[#9E7B28] dark:text-[#C8A558] text-xs group-hover:bg-[#C8A558]/20 transition-colors">
                     📞
                   </div>
                   <span>{personalInfo.phone}</span>
@@ -127,13 +124,13 @@ export default function AboutSection({ personalInfo, education }: AboutSectionPr
             transition={{ duration: 0.6 }}
             className="space-y-4"
           >
-            <h3 className="hf-display font-bold text-xl text-white mb-6 flex items-center gap-2">
+            <h3 className="hf-display font-bold text-xl text-slate-900 dark:text-white mb-6 flex items-center gap-2">
               <span className="text-gradient">Education</span> Timeline
             </h3>
 
             <div className="relative space-y-4">
               {/* Vertical line */}
-              <div className="absolute left-4 top-4 bottom-4 w-[2px] bg-gradient-to-b from-[#C8A558]/80 via-[#C8A558]/40 to-transparent" />
+              <div className="absolute left-4 top-4 bottom-4 w-[2px] bg-gradient-to-b from-[#C8A558] via-[#C8A558]/40 to-transparent" />
 
               {education.map((edu, i) => (
                 <motion.div
@@ -152,36 +149,36 @@ export default function AboutSection({ personalInfo, education }: AboutSectionPr
                   </div>
 
                   {/* Content */}
-                  <div className="glass-card rounded-xl p-5 flex-1 border border-white/5 hover:border-[#C8A558]/20 transition-all duration-300 group">
+                  <div className="rounded-xl p-5 flex-1 border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[.02] shadow-md dark:shadow-none hover:border-[#C8A558]/40 transition-all duration-300 group">
                     <div className="flex items-start justify-between gap-2 mb-2">
                       <div>
-                        <span className="hf-display font-bold text-white text-sm group-hover:text-[#C8A558] transition-colors">
+                        <span className="hf-display font-bold text-slate-900 dark:text-white text-base group-hover:text-[#9E7B28] dark:group-hover:text-[#C8A558] transition-colors">
                           {edu.degree}
                         </span>
                         {edu.grade && (
-                          <span className="ml-2 text-xs text-[#C8A558] hf-mono">
+                          <span className="ml-2 text-xs text-[#9E7B28] dark:text-[#C8A558] hf-mono font-medium">
                             {edu.grade}
                           </span>
                         )}
                       </div>
                       <span
-                        className={`flex-shrink-0 text-xs px-2 py-1 rounded-full ${
+                        className={`flex-shrink-0 text-xs px-2.5 py-1 rounded-full font-mono ${
                           i === 0
-                            ? "badge-current text-green-400 bg-green-400/10 border border-green-400/30"
-                            : "text-[#94A3B8] bg-white/5 border border-white/10"
+                            ? "text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/30"
+                            : "text-slate-600 dark:text-[#94A3B8] bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10"
                         }`}
                       >
                         {i === 0 ? "In Progress" : "Completed"}
                       </span>
                     </div>
-                    <p className="text-[#C8A558]/80 text-xs font-medium mb-1">
+                    <p className="text-[#9E7B28] dark:text-[#C8A558]/90 text-xs font-semibold mb-1">
                       {edu.field}
                     </p>
-                    <p className="text-[#94A3B8] text-xs">
+                    <p className="text-slate-600 dark:text-[#94A3B8] text-xs">
                       {edu.institution}
                     </p>
-                    <div className="flex items-center gap-1 mt-2 text-[#64748B] text-xs">
-                      <Calendar size={11} />
+                    <div className="flex items-center gap-1 mt-2 text-slate-400 dark:text-[#64748B] text-xs font-mono">
+                      <Calendar size={12} />
                       <span>{edu.duration}</span>
                     </div>
                   </div>

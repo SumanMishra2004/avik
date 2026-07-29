@@ -10,11 +10,7 @@ interface AwardsShelfProps {
 export default function AwardsShelf({ awards }: AwardsShelfProps) {
   return (
     <section id="awards" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0F172A]/60 to-transparent pointer-events-none" />
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#C8A558]/30 to-transparent" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#C8A558]/20 to-transparent" />
-
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -24,16 +20,16 @@ export default function AwardsShelf({ awards }: AwardsShelfProps) {
           className="text-center mb-16"
         >
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#C8A558]" />
-            <span className="text-[#C8A558] text-sm hf-mono font-medium tracking-widest uppercase">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#9E7B28] dark:to-[#C8A558]" />
+            <span className="text-[#9E7B28] dark:text-[#C8A558] text-sm hf-mono font-semibold tracking-widest uppercase">
               Recognition
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#C8A558]" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#9E7B28] dark:to-[#C8A558]" />
           </div>
-          <h2 className="section-heading text-4xl md:text-5xl font-bold text-white">
+          <h2 className="section-heading text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">
             Honors &amp; <span className="text-gradient">Awards</span>
           </h2>
-          <p className="text-[#94A3B8] text-lg mt-4">
+          <p className="text-slate-600 dark:text-[#94A3B8] text-lg mt-4">
             Recognized by Govt. of India, IEEE, and global organizations.
           </p>
         </motion.div>
@@ -47,34 +43,31 @@ export default function AwardsShelf({ awards }: AwardsShelfProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              whileHover={{
-                y: -4,
-                boxShadow: award.highlight
-                  ? "0 0 40px rgba(245,158,11,0.2)"
-                  : "0 0 30px rgba(200,165,88,0.15)",
-              }}
-              className={`glass-card rounded-2xl p-6 flex flex-col gap-4 transition-all duration-300 ${
-                award.highlight ? "border border-yellow-400/30" : "border border-white/5"
+              whileHover={{ y: -4 }}
+              className={`rounded-2xl p-6 flex flex-col gap-4 transition-all duration-300 border bg-white dark:bg-white/[.02] shadow-xl shadow-slate-900/5 dark:shadow-none ${
+                award.highlight
+                  ? "border-amber-400/50 bg-amber-500/5 dark:bg-amber-500/10"
+                  : "border-slate-200 dark:border-white/5 hover:border-[#C8A558]/40"
               }`}
             >
               <div className="text-4xl">{award.icon}</div>
               <div className="flex flex-col gap-1">
-                <h3 className={`font-semibold text-sm leading-snug ${award.highlight ? "text-yellow-300" : "text-white"}`}>
+                <h3 className={`font-bold text-sm leading-snug ${award.highlight ? "text-amber-800 dark:text-yellow-300" : "text-slate-900 dark:text-white"}`}>
                   {award.title}
                 </h3>
-                <p className="text-[#94A3B8] text-xs">{award.issuer}</p>
-                {award.via && <p className="text-[#64748B] text-xs">{award.via}</p>}
+                <p className="text-slate-600 dark:text-[#94A3B8] text-xs font-medium">{award.issuer}</p>
+                {award.via && <p className="text-slate-500 dark:text-[#64748B] text-xs">{award.via}</p>}
               </div>
-              <div className="flex items-center justify-between mt-auto pt-3 border-t border-white/5">
-                <span className={`text-xs hf-mono font-medium px-2 py-1 rounded-full ${
+              <div className="flex items-center justify-between mt-auto pt-3 border-t border-slate-200 dark:border-white/5">
+                <span className={`text-xs hf-mono font-semibold px-2.5 py-1 rounded-full ${
                   award.highlight
-                    ? "bg-yellow-400/10 text-yellow-400 border border-yellow-400/30"
-                    : "bg-white/5 text-[#94A3B8] border border-white/10"
+                    ? "bg-amber-400/20 text-amber-900 dark:text-yellow-400 border border-amber-400/40"
+                    : "bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-[#94A3B8] border border-slate-200 dark:border-white/10"
                 }`}>
                   {award.year}
                 </span>
                 {award.highlight && (
-                  <span className="text-xs text-yellow-400 font-medium">Gov. Funded ★</span>
+                  <span className="text-xs text-amber-800 dark:text-yellow-400 font-bold">Gov. Funded ★</span>
                 )}
               </div>
             </motion.div>
@@ -87,12 +80,11 @@ export default function AwardsShelf({ awards }: AwardsShelfProps) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-12 glass-card rounded-2xl p-6 border border-[#C8A558]/20 text-center"
-          style={{ boxShadow: "0 0 40px rgba(200,165,88,0.1)" }}
+          className="mt-12 rounded-2xl p-6 border border-[#C8A558]/40 bg-white dark:bg-white/[.02] text-center shadow-xl shadow-slate-900/5 dark:shadow-none"
         >
-          <div className="text-2xl mb-2">🏆</div>
-          <p className="text-white font-semibold">Government of India Recognized Researcher</p>
-          <p className="text-[#94A3B8] text-sm mt-2">
+          <div className="text-3xl mb-2">🏆</div>
+          <p className="text-slate-900 dark:text-white font-bold text-base">Government of India Recognized Researcher</p>
+          <p className="text-slate-600 dark:text-[#94A3B8] text-sm mt-2 max-w-2xl mx-auto">
             PRISM grant by DSIR (via IIT Kharagpur) &amp; MeitY TIDE Fund (via SINE IIT Bombay) — awarded for
             pioneering research in IoT and AI-driven systems.
           </p>

@@ -2,6 +2,7 @@ import { heroStat } from "./objects/heroStat";
 import { ctaButton } from "./objects/ctaButton";
 import { socialLink } from "./objects/socialLink";
 import { publicationsStatsSchema } from "./objects/publicationsStats";
+import { correspondingAuthor } from "./objects/correspondingAuthor";
 
 import { siteSettings } from "./documents/siteSettings";
 import { experience } from "./documents/experience";
@@ -20,6 +21,7 @@ export const schemaTypes = [
   ctaButton,
   socialLink,
   publicationsStatsSchema,
+  correspondingAuthor,
   // Documents
   siteSettings,
   experience,

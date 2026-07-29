@@ -25,7 +25,7 @@ export const SITE_SETTINGS_QUERY = groq`
 // ─── Research Interests ───────────────────────────────────────────────────────
 export const RESEARCH_INTERESTS_QUERY = groq`
   *[_type == "researchInterest" && isVisible != false] | order(order asc) {
-    _id, title, description, icon, color, order
+    _id, title, description, icon, color, order, correspondingAuthors[] { name, email, affiliation, role, phone }
   }
 `;
 
@@ -78,7 +78,7 @@ export const TEAM_MEMBERS_QUERY = groq`
 export const PROJECTS_QUERY = groq`
   *[_type == "project" && isVisible != false] | order(order asc) {
     _id, title, description, category, status,
-    institution, duration, authors, funded, techStack,
+    institution, duration, authors, correspondingAuthors[] { name, email, affiliation, role, phone }, funded, techStack,
     githubUrl, liveUrl, featured,
     image { asset->{ url } }
   }
@@ -88,7 +88,7 @@ export const PROJECTS_QUERY = groq`
 export const PUBLICATIONS_QUERY = groq`
   *[_type == "publication" && isVisible != false] | order(year desc) {
     _id, title, type, year, publisher,
-    authors, description, keywords, doi,
+    authors, correspondingAuthors[] { name, email, affiliation, role, phone }, description, keywords, doi,
     "pdfUrl": pdfFile.asset->url
   }
 `;

@@ -6,15 +6,6 @@ import type { SanitySiteSettings, SanityHeroStat } from "@/types/sanity";
 import Image from "next/image";
 import Link from "next/link";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  visible: (d: number = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.65, delay: d, ease: [0.22, 1, 0.36, 1] },
-  }),
-};
-
 const stagger = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.1 } },
@@ -33,245 +24,221 @@ export default function HeroSection({ personalInfo, heroStats, heroTags }: HeroS
   const profileImageUrl = personalInfo.profileImage?.asset?.url ?? "/profile.png";
 
   return (
-    <>
-      <section
-        id="hero"
-        className="relative min-h-screen flex flex-col lg:gap-8 gap-1 overflow-hidden"
-      >
-        {/* ══════════════════════════════════════════════════
-            MAIN HERO GRID
-        ══════════════════════════════════════════════════ */}
-        <div className="relative z-10 flex-1 max-w-[1360px] mx-auto w-full px-6 lg:px-12 pt-10 pb-0 grid grid-cols-1 lg:grid-cols-[1fr_400px] xl:grid-cols-[1fr_460px] items-end gap-0">
+    <section
+      id="hero"
+      className="relative min-h-screen flex flex-col justify-between overflow-hidden pt-28 lg:pt-36 pb-12 transition-colors duration-300"
+    >
+      {/* Background ambient radial glow */}
+      <div className="absolute inset-0 hero-radial-glow pointer-events-none opacity-40 dark:opacity-100" />
 
-          {/* ── LEFT COLUMN ── */}
-          <div className="flex flex-col pb-0">
+      {/* ══════════════════════════════════════════════════
+          MAIN HERO GRID
+      ══════════════════════════════════════════════════ */}
+      <div className="relative z-10 flex-1 max-w-[1360px] mx-auto w-full px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-[1fr_400px] xl:grid-cols-[1fr_460px] items-center gap-12 lg:gap-8">
 
-            {/* Eyebrow rule */}
-            <motion.div
-              initial={{ opacity: 0, x: -16 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.25 }}
-              className="flex items-center gap-3 mb-6"
+        {/* ── LEFT COLUMN ── */}
+        <div className="flex flex-col">
+
+          {/* Eyebrow rule */}
+          <motion.div
+            initial={{ opacity: 0, x: -16 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="flex items-center gap-3 mb-6"
+          >
+            <div className="h-px w-10 bg-[#9E7B28] dark:bg-[#C8A558]" />
+            <span className="hf-mono text-[10px] sm:text-xs tracking-[0.24em] text-[#9E7B28] dark:text-[#C8A558] uppercase font-semibold">
+              PhD · IIEST Shibpur &nbsp;·&nbsp; Associate Professor · UEM Kolkata
+            </span>
+          </motion.div>
+
+          {/* ── DISPLAY NAME ── */}
+          <div className="overflow-hidden">
+            <motion.h1
+              className="hf-display font-bold leading-[0.92] tracking-[-0.01em] text-slate-900 dark:text-white"
+              style={{ fontSize: "clamp(2.75rem, 6.5vw, 5.75rem)" }}
+              initial={{ y: 80, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             >
-              <div className="h-px w-10 bg-[#C8A558]" />
-              <span className="hf-mono text-[10px] tracking-[0.28em] text-[#C8A558] uppercase">
-                PhD · IIest Shibpur &nbsp;·&nbsp; Associate Professor · UEM Kolkata
-              </span>
-            </motion.div>
-
-            {/* ── DISPLAY NAME ── */}
-            <div className="overflow-hidden">
-              <motion.h1
-                className="hf-display font-medium leading-[0.86] tracking-[-0.01em] text-white"
-                style={{ fontSize: "clamp(3rem, 7vw, 6.5rem)" }}
-                initial={{ y: 120, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 1, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
-              >
-                {personalInfo.name.split(" ").slice(0, -1).join(" ")}{" "}
-                <em className="not-italic" style={{ color: "#C8A558" }}>
-                  {personalInfo.name.split(" ").slice(-1)}
-                </em>
-              </motion.h1>
-            </div>
-
-            {/* ── ROLE TAGS ── */}
-            <motion.div
-              className="flex flex-wrap gap-2 mt-8 mb-10"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.65, delay: 0.6 }}
-            >
-              {heroTags.map((t) => (
-                <span key={t} className="hero-tag hf-mono">
-                  {t}
-                </span>
-              ))}
-            </motion.div>
-
-            {/* ── BIO ── */}
-            <motion.p
-              className="hf-body text-white/38 text-[15px] leading-[1.8] max-w-[560px] mb-10"
-              style={{ color: "rgba(255,255,255,0.36)" }}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.65, delay: 0.72 }}
-            >
-              {personalInfo.bio}
-            </motion.p>
-
-            {/* ── CTAs ── */}
-            <motion.div
-              className="flex flex-wrap gap-3 pb-12"
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.65, delay: 0.82 }}
-            >
-              <Link
-                href="/publications"
-                className="cta-gold hf-body inline-flex items-center gap-2 px-6 py-3 rounded-md text-sm transition-all hover:-translate-y-0.5 active:translate-y-0"
-              >
-                View Research
-                <ArrowUpRight size={14} />
-              </Link>
-              <Link
-                href="/#contact"
-                className="cta-ghost hf-body inline-flex items-center gap-2 px-6 py-3 rounded-md text-sm transition-all hover:-translate-y-0.5 active:translate-y-0"
-              >
-                <Mail size={14} />
-                Collaborate
-              </Link>
-              <Link
-                href={personalInfo.cvUrl ?? "/CV.pdf"}
-                target="_blank"
-                className="cta-ghost hf-body inline-flex items-center gap-2 px-6 py-3 rounded-md text-sm transition-all hover:-translate-y-0.5 active:translate-y-0"
-              >
-                <Download size={14} />
-                Download CV
-              </Link>
-            </motion.div>
+              {personalInfo.name.split(" ").slice(0, -1).join(" ")}{" "}
+              <em className="not-italic text-[#9E7B28] dark:text-[#C8A558]">
+                {personalInfo.name.split(" ").slice(-1)}
+              </em>
+            </motion.h1>
           </div>
 
-          {/* ── RIGHT COLUMN: Photo ── */}
+          {/* ── ROLE TAGS ── */}
           <motion.div
-            className="hidden lg:flex justify-end items-end self-end"
-            initial={{ opacity: 0, y: 30 }}
+            className="flex flex-wrap gap-2.5 mt-6 mb-8"
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.65, delay: 0.5 }}
           >
-            <div className="relative">
-              {/* Gold offset frame */}
-              <div
-                aria-hidden
-                className="absolute inset-0 translate-x-3 translate-y-3 -z-10"
-                style={{
-                  clipPath: "polygon(0 0, 100% 0, 100% 88%, 88% 100%, 0 100%)",
-                  background:
-                    "linear-gradient(160deg, rgba(200,165,88,0.35) 0%, rgba(200,165,88,0.08) 60%, transparent 100%)",
-                }}
-              />
-
-              {/* Photo */}
-              <div
-                className="relative overflow-hidden"
-                style={{
-                  width: "clamp(260px, 26vw, 380px)",
-                  height: "clamp(340px, 34vw, 480px)",
-                  clipPath: "polygon(0 0, 100% 0, 100% 88%, 88% 100%, 0 100%)",
-                }}
+            {heroTags.map((t) => (
+              <span
+                key={t}
+                className="hero-tag hf-mono border-slate-300 dark:border-white/10 text-slate-600 dark:text-white/60 hover:border-[#C8A558] hover:text-[#9E7B28] dark:hover:text-[#C8A558]"
               >
-                <Image
-                  src={profileImageUrl}
-                  alt={personalInfo.profileImage?.alt ?? `Dr. ${personalInfo.name} — Associate Professor & Researcher`}
-                  fill
-                  className="object-cover object-top"
-                  style={{ filter: "contrast(1.04) saturate(0.92)" }}
-                  priority
-                />
-                {/* Bottom fade */}
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background:
-                      "linear-gradient(to top, rgba(12,14,19,0.55) 0%, rgba(12,14,19,0.1) 35%, transparent 60%)",
-                  }}
-                />
-              </div>
+                {t}
+              </span>
+            ))}
+          </motion.div>
 
-              {/* Floating card — top left */}
-              <motion.div
-                className="absolute -left-14 top-14 bg-[#161920]/50 backdrop-blur-2xl border border-white/8 rounded-md px-4 py-3 shadow-2xl"
-                style={{ borderColor: "rgba(255,255,255,0.07)" }}
-                animate={{ y: [0, -7, 0] }}
-                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <p className="hf-mono text-[9px] text-[#C8A558] tracking-widest mb-1">FUNDED RESEARCH</p>
-                <p className="hf-body text-white text-sm font-medium leading-none">PRISM · DSIR</p>
-                <p className="hf-body text-white/30 text-[11px] mt-1">MeitY TIDE Grant</p>
-              </motion.div>
+          {/* ── BIO ── */}
+          <motion.p
+            className="hf-body text-slate-600 dark:text-white/60 text-base sm:text-lg leading-[1.8] max-w-[580px] mb-8"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.6 }}
+          >
+            {personalInfo.bio}
+          </motion.p>
 
-              {/* Floating card — bottom right */}
-              <motion.div
-                className="absolute -right-10 bottom-24 bg-[#C8A558]/80 backdrop-blur-2xl rounded-md px-4 py-3 shadow-2xl"
-                animate={{ y: [0, 7, 0] }}
-                transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
-              >
-                <p
-                  className="hf-mono text-[9px] tracking-widest mb-1"
-                  style={{ color: "rgba(12,14,19,0.6)" }}
-                >
-                  RESEARCH OUTPUT
-                </p>
-                <p className="hf-body text-[#0C0E13] text-sm font-semibold leading-none">60+ Papers</p>
-                <p className="hf-body text-[11px] mt-1" style={{ color: "rgba(12,14,19,0.55)" }}>
-                  IEEE · Springer · T&amp;F
-                </p>
-              </motion.div>
-
-              {/* Vertical label */}
-              <div
-                className="absolute -left-8 bottom-20 flex flex-col items-center gap-3"
-                style={{ writingMode: "vertical-rl" }}
-              >
-                <div className="w-px h-10 bg-white/10" />
-                <span
-                  className="hf-mono text-[9px] tracking-[0.25em] text-white/60 uppercase"
-                  style={{ writingMode: "vertical-rl", textOrientation: "mixed" }}
-                >
-                  Associate Professor
-                </span>
-              </div>
-            </div>
+          {/* ── CTAs ── */}
+          <motion.div
+            className="flex flex-wrap gap-3.5"
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.7 }}
+          >
+            <Link
+              href="/publications"
+              className="cta-gold hf-body inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold shadow-md transition-all hover:-translate-y-0.5"
+            >
+              View Research
+              <ArrowUpRight size={16} />
+            </Link>
+            <Link
+              href="/#contact"
+              className="cta-ghost hf-body inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold border-slate-300 dark:border-white/15 text-slate-800 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-all hover:-translate-y-0.5"
+            >
+              <Mail size={16} />
+              Collaborate
+            </Link>
+            <Link
+              href={personalInfo.cvUrl ?? "/CV.pdf"}
+              target="_blank"
+              className="cta-ghost hf-body inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold border-slate-300 dark:border-white/15 text-slate-800 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-all hover:-translate-y-0.5"
+            >
+              <Download size={16} />
+              Download CV
+            </Link>
           </motion.div>
         </div>
 
-        {/* ══════════════════════════════════════════════════
-            STATS BAR
-        ══════════════════════════════════════════════════ */}
-        <div
-          className="relative z-10 border-t mt-0"
-          style={{ borderColor: "rgba(255,255,255,0.05)" }}
+        {/* ── RIGHT COLUMN: Photo ── */}
+        <motion.div
+          className="hidden lg:flex justify-end items-center"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="max-w-[1360px] mx-auto w-full px-0">
-            <motion.div
-              className="grid grid-cols-2 sm:grid-cols-4"
-              variants={stagger}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.6 }}
+          <div className="relative">
+            {/* Gold offset frame */}
+            <div
+              aria-hidden
+              className="absolute inset-0 translate-x-3 translate-y-3 -z-10"
+              style={{
+                clipPath: "polygon(0 0, 100% 0, 100% 88%, 88% 100%, 0 100%)",
+                background:
+                  "linear-gradient(160deg, rgba(200,165,88,0.4) 0%, rgba(200,165,88,0.1) 60%, transparent 100%)",
+              }}
+            />
+
+            {/* Photo Container */}
+            <div
+              className="relative overflow-hidden border border-slate-200 dark:border-white/10 rounded-2xl shadow-2xl"
+              style={{
+                width: "clamp(270px, 25vw, 380px)",
+                height: "clamp(350px, 33vw, 480px)",
+                clipPath: "polygon(0 0, 100% 0, 100% 88%, 88% 100%, 0 100%)",
+              }}
             >
-              {heroStats.map((stat, i) => (
-                <motion.div
-                  key={i}
-                  variants={{
-                    hidden: { opacity: 0, y: 20 },
-                    visible: {
-                      opacity: 1,
-                      y: 0,
-                      transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
-                    },
-                  }}
-                  className="stat-cell px-8 py-7"
-                >
-                  <p
-                    className="hf-display text-white font-light"
-                    style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1 }}
-                  >
-                    {stat.value}
-                    <span style={{ color: "#C8A558", fontSize: "0.7em" }}>{stat.suffix}</span>
-                  </p>
-                  <p
-                    className="hf-mono uppercase tracking-[0.22em] mt-2"
-                    style={{ fontSize: "9px", color: "rgba(255,255,255,0.28)" }}
-                  >
-                    {stat.label}
-                  </p>
-                </motion.div>
-              ))}
+              <Image
+                src={profileImageUrl}
+                alt={personalInfo.profileImage?.alt ?? `Dr. ${personalInfo.name}`}
+                fill
+                className="object-cover object-top"
+                priority
+              />
+              <div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(to top, rgba(12,14,19,0.4) 0%, transparent 50%)",
+                }}
+              />
+            </div>
+
+            {/* Floating card — top left */}
+            <motion.div
+              className="absolute -left-12 top-10 bg-white/90 dark:bg-[#161920]/80 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 shadow-xl"
+              animate={{ y: [0, -6, 0] }}
+              transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <p className="hf-mono text-[9px] text-[#9E7B28] dark:text-[#C8A558] font-bold tracking-widest mb-0.5">FUNDED RESEARCH</p>
+              <p className="hf-body text-slate-900 dark:text-white text-xs font-bold leading-tight">PRISM · DSIR</p>
+              <p className="hf-body text-slate-500 dark:text-white/40 text-[11px] mt-0.5">MeitY TIDE Grant</p>
+            </motion.div>
+
+            {/* Floating card — bottom right */}
+            <motion.div
+              className="absolute -right-8 bottom-20 bg-[#C8A558] text-slate-950 backdrop-blur-xl rounded-xl px-4 py-3 shadow-xl"
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            >
+              <p className="hf-mono text-[9px] tracking-widest text-slate-900/80 font-bold mb-0.5">OUTPUT</p>
+              <p className="hf-body text-slate-950 text-xs font-bold leading-tight">60+ Papers</p>
+              <p className="hf-body text-slate-900/70 text-[10px] mt-0.5">IEEE · Springer</p>
             </motion.div>
           </div>
+        </motion.div>
+      </div>
+
+      {/* ══════════════════════════════════════════════════
+          STATS BAR
+      ══════════════════════════════════════════════════ */}
+      <div className="relative z-10 border-t border-slate-200 dark:border-white/10 mt-12 bg-white/40 dark:bg-white/[0.02]">
+        <div className="max-w-[1360px] mx-auto w-full px-6">
+          <motion.div
+            className="grid grid-cols-2 sm:grid-cols-4"
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+          >
+            {heroStats.map((stat, i) => (
+              <motion.div
+                key={i}
+                variants={{
+                  hidden: { opacity: 0, y: 15 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { duration: 0.5, ease: "easeOut" },
+                  },
+                }}
+                className="stat-cell px-6 py-6 border-r border-slate-200 dark:border-white/5 last:border-r-0"
+              >
+                <p
+                  className="hf-display text-slate-900 dark:text-white font-semibold"
+                  style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1 }}
+                >
+                  {stat.value}
+                  <span className="text-[#9E7B28] dark:text-[#C8A558] text-[0.7em]">{stat.suffix}</span>
+                </p>
+                <p
+                  className="hf-mono uppercase tracking-[0.2em] mt-2 font-medium"
+                  style={{ fontSize: "10px", color: "var(--muted-foreground)" }}
+                >
+                  {stat.label}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
