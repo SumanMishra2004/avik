@@ -65,15 +65,15 @@ export default function Navbar({ navLinks = [] }: NavbarProps) {
             transition={{ duration: 0.5, ease: "easeOut" }}
             className={`pointer-events-auto flex items-center justify-between gap-4 px-4 sm:px-6 py-2.5 rounded-2xl border transition-all duration-300 ${
               scrolled
-                ? "bg-white/85 dark:bg-[#0A0F1E]/80 backdrop-blur-xl border-slate-200 dark:border-[#C8A558]/25 shadow-xl shadow-slate-900/5 dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
-                : "bg-white/60 dark:bg-[#0C0E13]/60 backdrop-blur-md border-slate-200/50 dark:border-white/10"
+                ? "bg-white/85 dark:bg-[#0A0F1E]/80 backdrop-blur-xl border-slate-200 dark:border-[#60A5FA]/25 shadow-xl shadow-slate-900/5 dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
+                : "bg-white/60 dark:bg-[#070B14]/60 backdrop-blur-md border-slate-200/50 dark:border-white/10"
             }`}
           >
             {/* Logo */}
             <div className="flex items-center gap-3 shrink-0">
               <motion.div
                 whileHover={{ rotate: 5, scale: 1.05 }}
-                className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#C8A558] to-[#A68541] flex items-center justify-center cursor-pointer shadow-md shadow-[#C8A558]/20"
+                className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#60A5FA] to-[#1D4ED8] flex items-center justify-center cursor-pointer shadow-md shadow-[#60A5FA]/20"
               >
                 <Link href="/" className="text-white font-black text-xs tracking-wider">
                   AKD
@@ -84,7 +84,7 @@ export default function Navbar({ navLinks = [] }: NavbarProps) {
                   <p className="font-bold text-sm leading-none text-slate-900 dark:text-white transition-colors">
                     Dr. Avik Kumar Das
                   </p>
-                  <p className="text-[#9E7B28] dark:text-[#C8A558] text-[10px] uppercase tracking-widest mt-1 font-medium">
+                  <p className="text-[#2563EB] dark:text-[#60A5FA] text-[10px] uppercase tracking-widest mt-1 font-medium">
                     Associate Professor
                   </p>
                 </Link>
@@ -114,7 +114,7 @@ export default function Navbar({ navLinks = [] }: NavbarProps) {
                     {isActive && (
                       <motion.div
                         layoutId="nav-pill"
-                        className="absolute inset-0 bg-[#C8A558]/25 dark:bg-[#C8A558] rounded-lg shadow-sm dark:shadow-[0_0_15px_rgba(200,165,88,0.3)]"
+                        className="absolute inset-0 bg-[#60A5FA]/25 dark:bg-[#60A5FA] rounded-lg shadow-sm dark:shadow-[0_0_15px_rgba(96,165,250,0.3)]"
                         transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
                       />
                     )}
@@ -131,7 +131,7 @@ export default function Navbar({ navLinks = [] }: NavbarProps) {
                 href="/#contact"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-950 text-xs font-bold hover:bg-[#C8A558] dark:hover:bg-[#C8A558] dark:hover:text-white transition-all shadow-md"
+                className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-950 text-xs font-bold hover:bg-[#60A5FA] dark:hover:bg-[#60A5FA] dark:hover:text-white transition-all shadow-md"
               >
                 LET&apos;S TALK <Send size={14} />
               </motion.a>
@@ -161,7 +161,7 @@ export default function Navbar({ navLinks = [] }: NavbarProps) {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="w-full max-w-sm bg-white dark:bg-[#0A0F1E] border border-slate-200 dark:border-[#C8A558]/30 rounded-3xl p-8 shadow-2xl relative"
+              className="w-full max-w-sm bg-white dark:bg-[#0A0F1E] border border-slate-200 dark:border-[#60A5FA]/30 rounded-3xl p-8 shadow-2xl relative"
             >
               <div className="flex flex-col gap-4">
                 {navLinks.map((link, i) => (
@@ -171,7 +171,7 @@ export default function Navbar({ navLinks = [] }: NavbarProps) {
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ delay: i * 0.08 }}
                     onClick={() => handleNavClick(link.href)}
-                    className="text-left text-xl font-bold text-slate-700 dark:text-gray-300 hover:text-[#9E7B28] dark:hover:text-[#C8A558] transition-colors"
+                    className="text-left text-xl font-bold text-slate-700 dark:text-gray-300 hover:text-[#2563EB] dark:hover:text-[#60A5FA] transition-colors"
                   >
                     {link.label}
                   </motion.button>

@@ -20,11 +20,11 @@ export default function AwardsShelf({ awards }: AwardsShelfProps) {
           className="text-center mb-16"
         >
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#9E7B28] dark:to-[#C8A558]" />
-            <span className="text-[#9E7B28] dark:text-[#C8A558] text-sm hf-mono font-semibold tracking-widest uppercase">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#2563EB] dark:to-[#60A5FA]" />
+            <span className="text-[#2563EB] dark:text-[#60A5FA] text-sm hf-mono font-semibold tracking-widest uppercase">
               Recognition
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#9E7B28] dark:to-[#C8A558]" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#2563EB] dark:to-[#60A5FA]" />
           </div>
           <h2 className="section-heading text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">
             Honors &amp; <span className="text-gradient">Awards</span>
@@ -47,7 +47,7 @@ export default function AwardsShelf({ awards }: AwardsShelfProps) {
               className={`rounded-2xl p-6 flex flex-col gap-4 transition-all duration-300 border bg-white dark:bg-white/[.02] shadow-xl shadow-slate-900/5 dark:shadow-none ${
                 award.highlight
                   ? "border-amber-400/50 bg-amber-500/5 dark:bg-amber-500/10"
-                  : "border-slate-200 dark:border-white/5 hover:border-[#C8A558]/40"
+                  : "border-slate-200 dark:border-white/5 hover:border-[#60A5FA]/40"
               }`}
             >
               <div className="text-4xl">{award.icon}</div>
@@ -80,7 +80,7 @@ export default function AwardsShelf({ awards }: AwardsShelfProps) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-12 rounded-2xl p-6 border border-[#C8A558]/40 bg-white dark:bg-white/[.02] text-center shadow-xl shadow-slate-900/5 dark:shadow-none"
+          className="mt-12 rounded-2xl p-6 border border-[#60A5FA]/40 bg-white dark:bg-white/[.02] text-center shadow-xl shadow-slate-900/5 dark:shadow-none"
         >
           <div className="text-3xl mb-2">🏆</div>
           <p className="text-slate-900 dark:text-white font-bold text-base">Government of India Recognized Researcher</p>

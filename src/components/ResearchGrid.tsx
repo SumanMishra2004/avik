@@ -44,11 +44,11 @@ export default function ResearchGrid({ interests }: ResearchGridProps) {
           className="text-center mb-16"
         >
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#9E7B28] dark:to-[#C8A558]" />
-            <span className="text-[#9E7B28] dark:text-[#C8A558] text-sm hf-mono font-semibold tracking-widest uppercase">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#2563EB] dark:to-[#60A5FA]" />
+            <span className="text-[#2563EB] dark:text-[#60A5FA] text-sm hf-mono font-semibold tracking-widest uppercase">
               Research Areas
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#9E7B28] dark:to-[#C8A558]" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#2563EB] dark:to-[#60A5FA]" />
           </div>
           <h2 className="section-heading text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4">
             Research <span className="text-gradient">Interests</span>
@@ -72,16 +72,16 @@ export default function ResearchGrid({ interests }: ResearchGridProps) {
               key={item._id}
               variants={cardVariants}
               whileHover={{ scale: 1.02 }}
-              className="rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/[.02] p-6 flex flex-col justify-between cursor-default group shadow-xl shadow-slate-900/5 dark:shadow-none hover:border-[#C8A558]/50 transition-all duration-300"
+              className="rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/[.02] p-6 flex flex-col justify-between cursor-default group shadow-xl shadow-slate-900/5 dark:shadow-none hover:border-[#60A5FA]/50 transition-all duration-300"
             >
               <div>
                 {/* Icon */}
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#C8A558] to-[#A68541] flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform duration-300 mb-4">
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#60A5FA] to-[#1D4ED8] flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform duration-300 mb-4">
                   {ICON_MAP[item.icon] ?? <Zap size={28} />}
                 </div>
 
                 {/* Title */}
-                <h3 className="font-bold text-slate-900 dark:text-white text-base leading-snug group-hover:text-[#9E7B28] dark:group-hover:text-[#C8A558] transition-colors duration-300 mb-2">
+                <h3 className="font-bold text-slate-900 dark:text-white text-base leading-snug group-hover:text-[#2563EB] dark:group-hover:text-[#60A5FA] transition-colors duration-300 mb-2">
                   {item.title}
                 </h3>
 
@@ -94,14 +94,14 @@ export default function ResearchGrid({ interests }: ResearchGridProps) {
               {/* Corresponding Authors */}
               {item.correspondingAuthors && item.correspondingAuthors.length > 0 && (
                 <div className="mt-4 pt-3 border-t border-slate-200 dark:border-white/10">
-                  <div className="flex items-center gap-1 text-[10px] font-mono font-bold text-[#9E7B28] dark:text-[#C8A558] uppercase tracking-wider mb-1">
+                  <div className="flex items-center gap-1 text-[10px] font-mono font-bold text-[#2563EB] dark:text-[#60A5FA] uppercase tracking-wider mb-1">
                     <UserCheck size={12} /> Lead Corresponding Author
                   </div>
                   {item.correspondingAuthors.slice(0, 1).map((ca, idx) => (
                     <div key={idx} className="flex items-center justify-between text-xs text-slate-700 dark:text-slate-300">
                       <span className="font-semibold">{ca.name}</span>
                       {ca.email && (
-                        <a href={`mailto:${ca.email}`} className="text-[#9E7B28] dark:text-[#C8A558] hover:underline inline-flex items-center gap-0.5 text-[11px]">
+                        <a href={`mailto:${ca.email}`} className="text-[#2563EB] dark:text-[#60A5FA] hover:underline inline-flex items-center gap-0.5 text-[11px]">
                           <Mail size={11} /> Contact
                         </a>
                       )}
@@ -111,7 +111,7 @@ export default function ResearchGrid({ interests }: ResearchGridProps) {
               )}
 
               {/* Bottom accent line */}
-              <div className="h-[2px] w-0 bg-[#C8A558] rounded-full group-hover:w-full transition-all duration-500 mt-4" />
+              <div className="h-[2px] w-0 bg-[#60A5FA] rounded-full group-hover:w-full transition-all duration-500 mt-4" />
             </motion.div>
           ))}
         </motion.div>

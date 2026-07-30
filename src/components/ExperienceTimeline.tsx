@@ -21,11 +21,11 @@ export default function ExperienceTimeline({ experience }: ExperienceTimelinePro
           className="text-center mb-16"
         >
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#9E7B28] dark:to-[#C8A558]" />
-            <span className="text-[#9E7B28] dark:text-[#C8A558] text-sm hf-mono font-semibold tracking-widest uppercase">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#2563EB] dark:to-[#60A5FA]" />
+            <span className="text-[#2563EB] dark:text-[#60A5FA] text-sm hf-mono font-semibold tracking-widest uppercase">
               Work History
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#9E7B28] dark:to-[#C8A558]" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#2563EB] dark:to-[#60A5FA]" />
           </div>
           <h2 className="section-heading text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">
             Professional <span className="text-gradient">Experience</span>
@@ -37,7 +37,7 @@ export default function ExperienceTimeline({ experience }: ExperienceTimelinePro
 
         {/* Timeline */}
         <div className="relative">
-          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#C8A558] via-[#C8A558]/40 to-transparent md:-translate-x-px" />
+          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#60A5FA] via-[#60A5FA]/40 to-transparent md:-translate-x-px" />
 
           <div className="space-y-8">
             {experience.map((item, i) => {
@@ -66,7 +66,7 @@ export default function ExperienceTimeline({ experience }: ExperienceTimelinePro
                   {/* Date Badge */}
                   <div className={`hidden md:flex md:w-5/12 ${isLeft ? "justify-end" : "justify-start"} items-start pt-2`}>
                     <div className={isLeft ? "text-right" : "text-left"}>
-                      <div className="text-[#9E7B28] dark:text-[#C8A558] text-sm hf-mono font-semibold">{item.duration}</div>
+                      <div className="text-[#2563EB] dark:text-[#60A5FA] text-sm hf-mono font-semibold">{item.duration}</div>
                       <div className="text-slate-500 dark:text-[#64748B] text-xs mt-1">{item.years}</div>
                     </div>
                   </div>
@@ -75,7 +75,7 @@ export default function ExperienceTimeline({ experience }: ExperienceTimelinePro
                   <div className="md:w-5/12">
                     <motion.div
                       whileHover={{ y: -2 }}
-                      className="rounded-2xl p-5 border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[.02] shadow-xl shadow-slate-900/5 dark:shadow-none hover:border-[#C8A558]/40 transition-all duration-300"
+                      className="rounded-2xl p-5 border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[.02] shadow-xl shadow-slate-900/5 dark:shadow-none hover:border-[#60A5FA]/40 transition-all duration-300"
                     >
                       <div className="flex items-start justify-between gap-2 mb-2">
                         <h3 className="hf-display font-bold text-slate-900 dark:text-white text-base">{item.role}</h3>
@@ -86,7 +86,7 @@ export default function ExperienceTimeline({ experience }: ExperienceTimelinePro
                         )}
                       </div>
                       {item.department && (
-                        <p className="text-[#9E7B28] dark:text-[#C8A558]/90 text-xs font-semibold mb-1">{item.department}</p>
+                        <p className="text-[#2563EB] dark:text-[#60A5FA]/90 text-xs font-semibold mb-1">{item.department}</p>
                       )}
                       <p className="text-slate-600 dark:text-[#94A3B8] text-sm">{item.institution}</p>
                       <div className="flex flex-wrap gap-3 mt-3 text-xs text-slate-500 dark:text-[#64748B]">

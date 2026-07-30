@@ -27,14 +27,14 @@ export default function Footer({ personalInfo = EMPTY_PERSONAL, navLinks = [] }:
 
   return (
     <footer className="relative border-t border-slate-200 dark:border-white/5 bg-slate-50 dark:bg-[#060A14] text-slate-700 dark:text-slate-300">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#C8A558]/30 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#60A5FA]/30 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#C8A558] to-[#A68541] flex items-center justify-center hf-mono font-bold text-white text-sm shadow-md">
+              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#60A5FA] to-[#1D4ED8] flex items-center justify-center hf-mono font-bold text-white text-sm shadow-md">
                 AKD
               </div>
               <div>
@@ -53,13 +53,13 @@ export default function Footer({ personalInfo = EMPTY_PERSONAL, navLinks = [] }:
 
           {/* Quick Nav */}
           <div>
-            <p className="text-[#9E7B28] dark:text-[#C8A558] text-xs font-bold uppercase tracking-widest mb-5 hf-mono">Quick Nav</p>
+            <p className="text-[#2563EB] dark:text-[#60A5FA] text-xs font-bold uppercase tracking-widest mb-5 hf-mono">Quick Nav</p>
             <div className="grid grid-cols-2 gap-2">
               {navLinks.map((link) => (
                 <button
                   key={link._id}
                   onClick={() => handleNavClick(link.href)}
-                  className="text-left text-slate-600 dark:text-[#64748B] text-sm hover:text-[#9E7B28] dark:hover:text-[#C8A558] transition-colors"
+                  className="text-left text-slate-600 dark:text-[#64748B] text-sm hover:text-[#2563EB] dark:hover:text-[#60A5FA] transition-colors"
                 >
                   {link.label}
                 </button>
@@ -69,22 +69,22 @@ export default function Footer({ personalInfo = EMPTY_PERSONAL, navLinks = [] }:
 
           {/* Socials */}
           <div>
-            <p className="text-[#9E7B28] dark:text-[#C8A558] text-xs font-bold uppercase tracking-widest mb-5 hf-mono">Connect</p>
+            <p className="text-[#2563EB] dark:text-[#60A5FA] text-xs font-bold uppercase tracking-widest mb-5 hf-mono">Connect</p>
             <div className="space-y-3">
-              <a href={personalInfo.twitterUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-slate-600 dark:text-[#64748B] text-sm hover:text-[#9E7B28] dark:hover:text-[#C8A558] transition-colors group">
-                <div className="w-7 h-7 rounded-lg bg-slate-200 dark:bg-white/10 flex items-center justify-center text-xs font-bold group-hover:border-[#C8A558]">𝕏</div>
+              <a href={personalInfo.twitterUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-slate-600 dark:text-[#64748B] text-sm hover:text-[#2563EB] dark:hover:text-[#60A5FA] transition-colors group">
+                <div className="w-7 h-7 rounded-lg bg-slate-200 dark:bg-white/10 flex items-center justify-center text-xs font-bold group-hover:border-[#60A5FA]">𝕏</div>
                 {personalInfo.twitter}
               </a>
-              <a href={personalInfo.linkedinUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-slate-600 dark:text-[#64748B] text-sm hover:text-[#9E7B28] dark:hover:text-[#C8A558] transition-colors group">
-                <div className="w-7 h-7 rounded-lg bg-slate-200 dark:bg-white/10 flex items-center justify-center text-xs font-bold text-[#9E7B28] dark:text-[#E2C07A] group-hover:border-[#C8A558]">in</div>
+              <a href={personalInfo.linkedinUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-slate-600 dark:text-[#64748B] text-sm hover:text-[#2563EB] dark:hover:text-[#60A5FA] transition-colors group">
+                <div className="w-7 h-7 rounded-lg bg-slate-200 dark:bg-white/10 flex items-center justify-center text-xs font-bold text-[#2563EB] dark:text-[#93C5FD] group-hover:border-[#60A5FA]">in</div>
                 linkedin.com/in/{personalInfo.linkedin}
               </a>
-              <a href={personalInfo.orcid} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-slate-600 dark:text-[#64748B] text-sm hover:text-[#9E7B28] dark:hover:text-[#C8A558] transition-colors group">
-                <div className="w-7 h-7 rounded-lg bg-slate-200 dark:bg-white/10 flex items-center justify-center text-xs font-bold text-emerald-600 dark:text-emerald-400 group-hover:border-[#C8A558]">ID</div>
+              <a href={personalInfo.orcid} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-slate-600 dark:text-[#64748B] text-sm hover:text-[#2563EB] dark:hover:text-[#60A5FA] transition-colors group">
+                <div className="w-7 h-7 rounded-lg bg-slate-200 dark:bg-white/10 flex items-center justify-center text-xs font-bold text-emerald-600 dark:text-emerald-400 group-hover:border-[#60A5FA]">ID</div>
                 ORCID Profile
               </a>
-              <a href={`mailto:${personalInfo.email}`} className="flex items-center gap-3 text-slate-600 dark:text-[#64748B] text-sm hover:text-[#9E7B28] dark:hover:text-[#C8A558] transition-colors group">
-                <div className="w-7 h-7 rounded-lg bg-slate-200 dark:bg-white/10 flex items-center justify-center text-xs font-bold group-hover:border-[#C8A558]">@</div>
+              <a href={`mailto:${personalInfo.email}`} className="flex items-center gap-3 text-slate-600 dark:text-[#64748B] text-sm hover:text-[#2563EB] dark:hover:text-[#60A5FA] transition-colors group">
+                <div className="w-7 h-7 rounded-lg bg-slate-200 dark:bg-white/10 flex items-center justify-center text-xs font-bold group-hover:border-[#60A5FA]">@</div>
                 {personalInfo.email}
               </a>
             </div>
@@ -100,7 +100,7 @@ export default function Footer({ personalInfo = EMPTY_PERSONAL, navLinks = [] }:
           </span>
           <span className="hf-mono" suppressHydrationWarning>
             {"Designed with passion from "}
-            <span className="text-[#9E7B28] dark:text-[#C8A558] font-bold">{"Kolkata 🇮🇳"}</span>
+            <span className="text-[#2563EB] dark:text-[#60A5FA] font-bold">{"Kolkata 🇮🇳"}</span>
             {" · Built with Next.js & Sanity CMS"}
           </span>
         </div>

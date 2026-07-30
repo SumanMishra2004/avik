@@ -22,11 +22,11 @@ export default function AboutSection({ personalInfo, education }: AboutSectionPr
           className="text-center mb-16"
         >
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#9E7B28] dark:to-[#C8A558]" />
-            <span className="text-[#9E7B28] dark:text-[#C8A558] text-sm hf-mono font-semibold tracking-widest uppercase">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#2563EB] dark:to-[#60A5FA]" />
+            <span className="text-[#2563EB] dark:text-[#60A5FA] text-sm hf-mono font-semibold tracking-widest uppercase">
               About Me
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#9E7B28] dark:to-[#C8A558]" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#2563EB] dark:to-[#60A5FA]" />
           </div>
           <h2 className="section-heading text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">
             Who I <span className="text-gradient">Am</span>
@@ -45,7 +45,7 @@ export default function AboutSection({ personalInfo, education }: AboutSectionPr
             {/* Bio card */}
             <div className="rounded-2xl p-8 border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[.02] shadow-xl shadow-slate-900/5 dark:shadow-none">
               <div className="flex items-start gap-4 mb-6">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#C8A558] to-[#A68541] flex items-center justify-center text-white hf-display font-bold text-xl shadow-lg flex-shrink-0">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#60A5FA] to-[#1D4ED8] flex items-center justify-center text-white hf-display font-bold text-xl shadow-lg flex-shrink-0">
                   AKD
                 </div>
                 <div>
@@ -53,7 +53,7 @@ export default function AboutSection({ personalInfo, education }: AboutSectionPr
                     {personalInfo.name}
                   </h3>
                   <div className="flex items-center gap-2 text-slate-600 dark:text-[#94A3B8] text-sm mt-1">
-                    <MapPin size={14} className="text-[#9E7B28] dark:text-[#C8A558]" />
+                    <MapPin size={14} className="text-[#2563EB] dark:text-[#60A5FA]" />
                     <span>{personalInfo.location}</span>
                   </div>
                   <div className="mt-2">
@@ -72,7 +72,7 @@ export default function AboutSection({ personalInfo, education }: AboutSectionPr
             {/* Identity Badges */}
             <div className="rounded-2xl p-6 border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[.02] shadow-xl shadow-slate-900/5 dark:shadow-none">
               <h4 className="text-slate-900 dark:text-white font-semibold text-sm mb-4 flex items-center gap-2">
-                <Briefcase size={16} className="text-[#9E7B28] dark:text-[#C8A558]" />
+                <Briefcase size={16} className="text-[#2563EB] dark:text-[#60A5FA]" />
                 Identity &amp; Roles
               </h4>
               <div className="flex flex-wrap gap-2">
@@ -80,7 +80,7 @@ export default function AboutSection({ personalInfo, education }: AboutSectionPr
                   <motion.span
                     key={badge}
                     whileHover={{ scale: 1.05, y: -1 }}
-                    className="px-3 py-1.5 rounded-full text-xs font-medium bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[#9E7B28] dark:text-[#C8A558] hover:border-[#C8A558] transition-all duration-200 cursor-default"
+                    className="px-3 py-1.5 rounded-full text-xs font-medium bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[#2563EB] dark:text-[#60A5FA] hover:border-[#60A5FA] transition-all duration-200 cursor-default"
                   >
                     {badge}
                   </motion.span>
@@ -96,18 +96,18 @@ export default function AboutSection({ personalInfo, education }: AboutSectionPr
               <div className="space-y-3">
                 <a
                   href={`mailto:${personalInfo.email}`}
-                  className="flex items-center gap-3 text-slate-600 dark:text-[#94A3B8] text-sm hover:text-[#9E7B28] dark:hover:text-[#C8A558] transition-colors group"
+                  className="flex items-center gap-3 text-slate-600 dark:text-[#94A3B8] text-sm hover:text-[#2563EB] dark:hover:text-[#60A5FA] transition-colors group"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-[#9E7B28] dark:text-[#C8A558] group-hover:bg-[#C8A558]/20 transition-colors font-bold">
+                  <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-[#2563EB] dark:text-[#60A5FA] group-hover:bg-[#60A5FA]/20 transition-colors font-bold">
                     @
                   </div>
                   <span>{personalInfo.email}</span>
                 </a>
                 <a
                   href={`tel:${personalInfo.phone}`}
-                  className="flex items-center gap-3 text-slate-600 dark:text-[#94A3B8] text-sm hover:text-[#9E7B28] dark:hover:text-[#C8A558] transition-colors group"
+                  className="flex items-center gap-3 text-slate-600 dark:text-[#94A3B8] text-sm hover:text-[#2563EB] dark:hover:text-[#60A5FA] transition-colors group"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-[#9E7B28] dark:text-[#C8A558] text-xs group-hover:bg-[#C8A558]/20 transition-colors">
+                  <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-[#2563EB] dark:text-[#60A5FA] text-xs group-hover:bg-[#60A5FA]/20 transition-colors">
                     📞
                   </div>
                   <span>{personalInfo.phone}</span>
@@ -130,7 +130,7 @@ export default function AboutSection({ personalInfo, education }: AboutSectionPr
 
             <div className="relative space-y-4">
               {/* Vertical line */}
-              <div className="absolute left-4 top-4 bottom-4 w-[2px] bg-gradient-to-b from-[#C8A558] via-[#C8A558]/40 to-transparent" />
+              <div className="absolute left-4 top-4 bottom-4 w-[2px] bg-gradient-to-b from-[#60A5FA] via-[#60A5FA]/40 to-transparent" />
 
               {education.map((edu, i) => (
                 <motion.div
@@ -149,14 +149,14 @@ export default function AboutSection({ personalInfo, education }: AboutSectionPr
                   </div>
 
                   {/* Content */}
-                  <div className="rounded-xl p-5 flex-1 border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[.02] shadow-md dark:shadow-none hover:border-[#C8A558]/40 transition-all duration-300 group">
+                  <div className="rounded-xl p-5 flex-1 border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[.02] shadow-md dark:shadow-none hover:border-[#60A5FA]/40 transition-all duration-300 group">
                     <div className="flex items-start justify-between gap-2 mb-2">
                       <div>
-                        <span className="hf-display font-bold text-slate-900 dark:text-white text-base group-hover:text-[#9E7B28] dark:group-hover:text-[#C8A558] transition-colors">
+                        <span className="hf-display font-bold text-slate-900 dark:text-white text-base group-hover:text-[#2563EB] dark:group-hover:text-[#60A5FA] transition-colors">
                           {edu.degree}
                         </span>
                         {edu.grade && (
-                          <span className="ml-2 text-xs text-[#9E7B28] dark:text-[#C8A558] hf-mono font-medium">
+                          <span className="ml-2 text-xs text-[#2563EB] dark:text-[#60A5FA] hf-mono font-medium">
                             {edu.grade}
                           </span>
                         )}
@@ -171,7 +171,7 @@ export default function AboutSection({ personalInfo, education }: AboutSectionPr
                         {i === 0 ? "In Progress" : "Completed"}
                       </span>
                     </div>
-                    <p className="text-[#9E7B28] dark:text-[#C8A558]/90 text-xs font-semibold mb-1">
+                    <p className="text-[#2563EB] dark:text-[#60A5FA]/90 text-xs font-semibold mb-1">
                       {edu.field}
                     </p>
                     <p className="text-slate-600 dark:text-[#94A3B8] text-xs">

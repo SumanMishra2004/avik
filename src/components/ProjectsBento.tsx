@@ -31,14 +31,14 @@ export default function ProjectsBento({ projects }: ProjectsBentoProps) {
           className="mb-16 text-center"
         >
           <div className="flex items-center justify-center gap-4 mb-4">
-            <div className="w-12 h-px bg-gradient-to-r from-transparent to-[#9E7B28] dark:to-[#C8A558]" />
-            <span className="text-[#9E7B28] dark:text-[#C8A558] text-xs hf-mono font-semibold tracking-widest uppercase">
+            <div className="w-12 h-px bg-gradient-to-r from-transparent to-[#2563EB] dark:to-[#60A5FA]" />
+            <span className="text-[#2563EB] dark:text-[#60A5FA] text-xs hf-mono font-semibold tracking-widest uppercase">
               Current Focus
             </span>
-            <div className="w-12 h-px bg-gradient-to-l from-transparent to-[#9E7B28] dark:to-[#C8A558]" />
+            <div className="w-12 h-px bg-gradient-to-l from-transparent to-[#2563EB] dark:to-[#60A5FA]" />
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">
-            Featured <span className="text-[#9E7B28] dark:text-[#C8A558]">Projects</span>
+            Featured <span className="text-[#2563EB] dark:text-[#60A5FA]">Projects</span>
           </h2>
           <p className="text-slate-600 dark:text-[#94A3B8] text-lg max-w-2xl mx-auto">
             Exploring the frontiers of connectivity, machine intelligence, and systems engineering.
@@ -59,7 +59,7 @@ export default function ProjectsBento({ projects }: ProjectsBentoProps) {
               onClick={() => setActiveFilter(tab)}
               className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
                 activeFilter === tab
-                  ? "bg-[#C8A558] text-slate-950 font-bold shadow-lg shadow-[#C8A558]/20"
+                  ? "bg-[#60A5FA] text-slate-950 font-bold shadow-lg shadow-[#60A5FA]/20"
                   : "bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-[#94A3B8] hover:bg-slate-200 dark:hover:bg-white/10 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-white/5"
               }`}
             >
@@ -97,7 +97,7 @@ export default function ProjectsBento({ projects }: ProjectsBentoProps) {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.6, delay: i * 0.1 }}
-                    className="group flex flex-col lg:flex-row gap-8 lg:gap-12 items-stretch p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/[.02] hover:border-[#C8A558]/40 shadow-xl shadow-slate-900/5 dark:shadow-none transition-all duration-500"
+                    className="group flex flex-col lg:flex-row gap-8 lg:gap-12 items-stretch p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/[.02] hover:border-[#60A5FA]/40 shadow-xl shadow-slate-900/5 dark:shadow-none transition-all duration-500"
                   >
                     {/* Image Container - alternates left/right based on index */}
                     <div className={`w-full lg:w-1/2 rounded-2xl overflow-hidden bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 aspect-video relative min-h-[260px] ${i % 2 !== 0 ? 'lg:order-2' : ''}`}>
@@ -107,7 +107,7 @@ export default function ProjectsBento({ projects }: ProjectsBentoProps) {
                            style={{ backgroundImage: `url(${project.image.asset.url})` }}
                         />
                       ) : (
-                         <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 dark:from-[#0A0F1E] dark:to-[#1a2235] flex flex-col items-center justify-center text-[#9E7B28] dark:text-[#C8A558]/40">
+                         <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 dark:from-[#0A0F1E] dark:to-[#1a2235] flex flex-col items-center justify-center text-[#2563EB] dark:text-[#60A5FA]/40">
                             <span className="font-display text-4xl font-bold">{project.category}</span>
                             <span className="text-sm tracking-widest uppercase mt-2 opacity-70">Project</span>
                          </div>
@@ -118,7 +118,7 @@ export default function ProjectsBento({ projects }: ProjectsBentoProps) {
                     <div className={`w-full lg:w-1/2 flex flex-col justify-between ${i % 2 !== 0 ? 'lg:order-1' : ''}`}>
                       <div>
                         <div className="flex flex-wrap items-center gap-2.5 mb-4">
-                          <span className="px-3 py-1 rounded-full text-xs uppercase tracking-widest font-mono text-[#9E7B28] dark:text-[#C8A558] bg-[#C8A558]/10 border border-[#C8A558]/30 font-semibold">
+                          <span className="px-3 py-1 rounded-full text-xs uppercase tracking-widest font-mono text-[#2563EB] dark:text-[#60A5FA] bg-[#60A5FA]/10 border border-[#60A5FA]/30 font-semibold">
                             {project.category}
                           </span>
                           <span className="text-slate-600 dark:text-[#94A3B8] text-xs font-mono border border-slate-200 dark:border-white/10 px-3 py-1 rounded-full bg-slate-50 dark:bg-transparent">
@@ -131,7 +131,7 @@ export default function ProjectsBento({ projects }: ProjectsBentoProps) {
                           )}
                         </div>
 
-                        <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-[#9E7B28] dark:group-hover:text-[#C8A558] transition-colors leading-tight">
+                        <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-[#2563EB] dark:group-hover:text-[#60A5FA] transition-colors leading-tight">
                           {project.title}
                         </h3>
                         
@@ -142,7 +142,7 @@ export default function ProjectsBento({ projects }: ProjectsBentoProps) {
                         {/* Authors / Team */}
                         {project.authors && project.authors.length > 0 && (
                           <p className="text-slate-500 dark:text-[#64748B] text-xs sm:text-sm mb-4">
-                            <span className="text-[#9E7B28] dark:text-[#E2C07A] font-semibold mr-1.5">Collaborators:</span>
+                            <span className="text-[#2563EB] dark:text-[#93C5FD] font-semibold mr-1.5">Collaborators:</span>
                             {project.authors.join(", ")}
                           </p>
                         )}
@@ -150,7 +150,7 @@ export default function ProjectsBento({ projects }: ProjectsBentoProps) {
                         {/* Corresponding Authors Section */}
                         {project.correspondingAuthors && project.correspondingAuthors.length > 0 && (
                           <div className="mb-5 p-3.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10">
-                            <div className="flex items-center gap-1.5 text-[11px] font-mono font-bold text-[#9E7B28] dark:text-[#C8A558] uppercase tracking-wider mb-2">
+                            <div className="flex items-center gap-1.5 text-[11px] font-mono font-bold text-[#2563EB] dark:text-[#60A5FA] uppercase tracking-wider mb-2">
                               <UserCheck size={14} />
                               Corresponding Author Details
                             </div>
@@ -160,7 +160,7 @@ export default function ProjectsBento({ projects }: ProjectsBentoProps) {
                                   <div className="flex items-center gap-2">
                                     <span className="font-semibold text-slate-900 dark:text-white">{ca.name}</span>
                                     {ca.role && (
-                                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#C8A558]/20 text-[#9E7B28] dark:text-[#E2C07A] font-mono">
+                                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#60A5FA]/20 text-[#2563EB] dark:text-[#93C5FD] font-mono">
                                         {ca.role}
                                       </span>
                                     )}
@@ -173,7 +173,7 @@ export default function ProjectsBento({ projects }: ProjectsBentoProps) {
                                   {ca.email && (
                                     <a
                                       href={`mailto:${ca.email}`}
-                                      className="inline-flex items-center gap-1 text-[11px] text-[#9E7B28] dark:text-[#C8A558] hover:underline font-medium"
+                                      className="inline-flex items-center gap-1 text-[11px] text-[#2563EB] dark:text-[#60A5FA] hover:underline font-medium"
                                     >
                                       <Mail size={12} /> {ca.email}
                                     </a>
@@ -225,7 +225,7 @@ export default function ProjectsBento({ projects }: ProjectsBentoProps) {
                                href={project.liveUrl}
                                target="_blank"
                                rel="noopener noreferrer"
-                               className="flex items-center gap-1.5 text-xs font-bold text-[#9E7B28] dark:text-[#C8A558] hover:underline transition-colors"
+                               className="flex items-center gap-1.5 text-xs font-bold text-[#2563EB] dark:text-[#60A5FA] hover:underline transition-colors"
                              >
                                View Project <ArrowRight size={14} />
                              </a>

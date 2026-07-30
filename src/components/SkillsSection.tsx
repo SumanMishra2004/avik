@@ -21,7 +21,7 @@ function SkillBar({ name, level }: { name: string; level: number }) {
     <div ref={ref} className="space-y-2">
       <div className="flex justify-between items-center">
         <span className="text-slate-900 dark:text-white text-sm font-semibold">{name}</span>
-        <span className="text-[#9E7B28] dark:text-[#C8A558] text-xs hf-mono font-bold">{level}%</span>
+        <span className="text-[#2563EB] dark:text-[#60A5FA] text-xs hf-mono font-bold">{level}%</span>
       </div>
       <div className="h-2.5 rounded-full bg-slate-100 dark:bg-white/5 overflow-hidden border border-slate-200 dark:border-white/5">
         <motion.div
@@ -66,11 +66,11 @@ export default function SkillsSection({ skills, toolChips }: SkillsSectionProps)
           className="text-center mb-16"
         >
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#9E7B28] dark:to-[#C8A558]" />
-            <span className="text-[#9E7B28] dark:text-[#C8A558] text-sm hf-mono font-semibold tracking-widest uppercase">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#2563EB] dark:to-[#60A5FA]" />
+            <span className="text-[#2563EB] dark:text-[#60A5FA] text-sm hf-mono font-semibold tracking-widest uppercase">
               Expertise
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#9E7B28] dark:to-[#C8A558]" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#2563EB] dark:to-[#60A5FA]" />
           </div>
           <h2 className="section-heading text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">
             Skills &amp; <span className="text-gradient">Expertise</span>
@@ -87,7 +87,7 @@ export default function SkillsSection({ skills, toolChips }: SkillsSectionProps)
             className="rounded-2xl p-8 border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[.02] shadow-xl shadow-slate-900/5 dark:shadow-none"
           >
             <h3 className="hf-display font-bold text-xl text-slate-900 dark:text-white mb-6 flex items-center gap-2">
-              <span className="w-3 h-3 rounded-full bg-[#C8A558]" />
+              <span className="w-3 h-3 rounded-full bg-[#60A5FA]" />
               Technical Skills
             </h3>
             <div className="space-y-5">
@@ -108,7 +108,7 @@ export default function SkillsSection({ skills, toolChips }: SkillsSectionProps)
               className="rounded-2xl p-8 border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[.02] shadow-xl shadow-slate-900/5 dark:shadow-none"
             >
               <h3 className="hf-display font-bold text-xl text-slate-900 dark:text-white mb-6 flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-[#C8A558]" />
+                <span className="w-3 h-3 rounded-full bg-[#60A5FA]" />
                 Languages
               </h3>
               <div className="space-y-4">
@@ -130,7 +130,7 @@ export default function SkillsSection({ skills, toolChips }: SkillsSectionProps)
               className="rounded-2xl p-8 border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[.02] shadow-xl shadow-slate-900/5 dark:shadow-none"
             >
               <h3 className="hf-display font-bold text-xl text-slate-900 dark:text-white mb-5 flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-[#C8A558]" />
+                <span className="w-3 h-3 rounded-full bg-[#60A5FA]" />
                 Tools &amp; Platforms
               </h3>
               <div className="flex flex-wrap gap-2">
@@ -138,7 +138,7 @@ export default function SkillsSection({ skills, toolChips }: SkillsSectionProps)
                   <motion.span
                     key={tool}
                     whileHover={{ scale: 1.05, y: -2 }}
-                    className="px-3 py-1.5 rounded-full text-xs hf-mono font-semibold border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 text-slate-700 dark:text-[#94A3B8] hover:text-[#9E7B28] dark:hover:text-[#C8A558] hover:border-[#C8A558] transition-all duration-200 cursor-default"
+                    className="px-3 py-1.5 rounded-full text-xs hf-mono font-semibold border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 text-slate-700 dark:text-[#94A3B8] hover:text-[#2563EB] dark:hover:text-[#60A5FA] hover:border-[#60A5FA] transition-all duration-200 cursor-default"
                   >
                     {tool}
                   </motion.span>

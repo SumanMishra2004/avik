@@ -29,10 +29,10 @@ export default function ContactSection({ personalInfo }: ContactSectionProps) {
   };
 
   const CONTACT_CARDS = [
-    { icon: <Mail size={20} />, label: "Email", value: personalInfo.email, href: `mailto:${personalInfo.email}`, color: "from-[#C8A558] to-[#A68541]" },
-    { icon: <Phone size={20} />, label: "Phone", value: personalInfo.phone, href: `tel:${personalInfo.phone}`, color: "from-[#A68541] to-[#C8A558]" },
-    { icon: <MapPin size={20} />, label: "Location", value: personalInfo.location, href: "https://maps.google.com/?q=Kolkata,India", color: "from-indigo-600 to-[#C8A558]" },
-    { icon: <ExternalLink size={20} />, label: "ORCID", value: "0000-0001-8824-703X", href: personalInfo.orcid, color: "from-sky-600 to-[#C8A558]" },
+    { icon: <Mail size={20} />, label: "Email", value: personalInfo.email, href: `mailto:${personalInfo.email}`, color: "from-[#60A5FA] to-[#1D4ED8]" },
+    { icon: <Phone size={20} />, label: "Phone", value: personalInfo.phone, href: `tel:${personalInfo.phone}`, color: "from-[#1D4ED8] to-[#60A5FA]" },
+    { icon: <MapPin size={20} />, label: "Location", value: personalInfo.location, href: "https://maps.google.com/?q=Kolkata,India", color: "from-indigo-600 to-[#60A5FA]" },
+    { icon: <ExternalLink size={20} />, label: "ORCID", value: "0000-0001-8824-703X", href: personalInfo.orcid, color: "from-sky-600 to-[#60A5FA]" },
   ];
 
   const SOCIAL_LINKS = [
@@ -53,9 +53,9 @@ export default function ContactSection({ personalInfo }: ContactSectionProps) {
           className="text-center mb-16"
         >
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#9E7B28] dark:to-[#C8A558]" />
-            <span className="text-[#9E7B28] dark:text-[#C8A558] text-sm hf-mono font-semibold tracking-widest uppercase">Contact</span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#9E7B28] dark:to-[#C8A558]" />
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#2563EB] dark:to-[#60A5FA]" />
+            <span className="text-[#2563EB] dark:text-[#60A5FA] text-sm hf-mono font-semibold tracking-widest uppercase">Contact</span>
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#2563EB] dark:to-[#60A5FA]" />
           </div>
           <h2 className="section-heading text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4">
             Open to Research <span className="text-gradient">Collaborations</span>
@@ -85,14 +85,14 @@ export default function ContactSection({ personalInfo }: ContactSectionProps) {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
                 whileHover={{ x: 4 }}
-                className="flex items-center gap-4 rounded-xl p-4 border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[.02] shadow-lg shadow-slate-900/5 dark:shadow-none hover:border-[#C8A558]/40 transition-all duration-300 group"
+                className="flex items-center gap-4 rounded-xl p-4 border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[.02] shadow-lg shadow-slate-900/5 dark:shadow-none hover:border-[#60A5FA]/40 transition-all duration-300 group"
               >
                 <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${card.color} flex items-center justify-center text-white flex-shrink-0 shadow-md transition-shadow`}>
                   {card.icon}
                 </div>
                 <div className="min-w-0">
                   <div className="text-slate-500 dark:text-[#64748B] text-xs mb-0.5 font-medium">{card.label}</div>
-                  <div className="text-slate-900 dark:text-[#F1F5F9] text-sm font-bold truncate group-hover:text-[#9E7B28] dark:group-hover:text-[#C8A558] transition-colors">{card.value}</div>
+                  <div className="text-slate-900 dark:text-[#F1F5F9] text-sm font-bold truncate group-hover:text-[#2563EB] dark:group-hover:text-[#60A5FA] transition-colors">{card.value}</div>
                 </div>
               </motion.a>
             ))}
@@ -109,11 +109,11 @@ export default function ContactSection({ personalInfo }: ContactSectionProps) {
               <div className="space-y-3">
                 {SOCIAL_LINKS.map((social, i) => (
                   <a key={i} href={social.href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group">
-                    <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-[#9E7B28] dark:text-[#C8A558] text-xs font-bold group-hover:border-[#C8A558] transition-all">
+                    <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-[#2563EB] dark:text-[#60A5FA] text-xs font-bold group-hover:border-[#60A5FA] transition-all">
                       {social.icon}
                     </div>
                     <div className="min-w-0">
-                      <div className="text-slate-700 dark:text-[#94A3B8] text-xs font-medium group-hover:text-[#9E7B28] dark:group-hover:text-[#C8A558] transition-colors truncate">{social.value}</div>
+                      <div className="text-slate-700 dark:text-[#94A3B8] text-xs font-medium group-hover:text-[#2563EB] dark:group-hover:text-[#60A5FA] transition-colors truncate">{social.value}</div>
                     </div>
                   </a>
                 ))}
@@ -147,27 +147,27 @@ export default function ContactSection({ personalInfo }: ContactSectionProps) {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
                       <label className="block text-slate-700 dark:text-[#94A3B8] text-xs mb-2 font-bold uppercase tracking-wider">Your Name *</label>
-                      <input id="contact-name" type="text" required value={formState.name} onChange={(e) => setFormState({ ...formState, name: e.target.value })} placeholder="Dr. John Smith" className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#64748B] text-sm focus:outline-none focus:border-[#C8A558] transition-all" />
+                      <input id="contact-name" type="text" required value={formState.name} onChange={(e) => setFormState({ ...formState, name: e.target.value })} placeholder="Dr. John Smith" className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#64748B] text-sm focus:outline-none focus:border-[#60A5FA] transition-all" />
                     </div>
                     <div>
                       <label className="block text-slate-700 dark:text-[#94A3B8] text-xs mb-2 font-bold uppercase tracking-wider">Email Address *</label>
-                      <input id="contact-email" type="email" required value={formState.email} onChange={(e) => setFormState({ ...formState, email: e.target.value })} placeholder="you@university.edu" className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#64748B] text-sm focus:outline-none focus:border-[#C8A558] transition-all" />
+                      <input id="contact-email" type="email" required value={formState.email} onChange={(e) => setFormState({ ...formState, email: e.target.value })} placeholder="you@university.edu" className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#64748B] text-sm focus:outline-none focus:border-[#60A5FA] transition-all" />
                     </div>
                   </div>
                   <div>
                     <label className="block text-slate-700 dark:text-[#94A3B8] text-xs mb-2 font-bold uppercase tracking-wider">Subject</label>
-                    <input id="contact-subject" type="text" value={formState.subject} onChange={(e) => setFormState({ ...formState, subject: e.target.value })} placeholder="Research Collaboration — 6G Channel Modeling" className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#64748B] text-sm focus:outline-none focus:border-[#C8A558] transition-all" />
+                    <input id="contact-subject" type="text" value={formState.subject} onChange={(e) => setFormState({ ...formState, subject: e.target.value })} placeholder="Research Collaboration — 6G Channel Modeling" className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#64748B] text-sm focus:outline-none focus:border-[#60A5FA] transition-all" />
                   </div>
                   <div>
                     <label className="block text-slate-700 dark:text-[#94A3B8] text-xs mb-2 font-bold uppercase tracking-wider">Message *</label>
-                    <textarea id="contact-message" required rows={5} value={formState.message} onChange={(e) => setFormState({ ...formState, message: e.target.value })} placeholder="I'd like to collaborate on..." className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#64748B] text-sm focus:outline-none focus:border-[#C8A558] transition-all resize-none" />
+                    <textarea id="contact-message" required rows={5} value={formState.message} onChange={(e) => setFormState({ ...formState, message: e.target.value })} placeholder="I'd like to collaborate on..." className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#64748B] text-sm focus:outline-none focus:border-[#60A5FA] transition-all resize-none" />
                   </div>
                   <motion.button
                     type="submit"
                     id="contact-submit-btn"
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-gradient-to-r from-[#C8A558] to-[#A68541] text-white font-bold text-sm shadow-md transition-all duration-300"
+                    className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-gradient-to-r from-[#60A5FA] to-[#1D4ED8] text-white font-bold text-sm shadow-md transition-all duration-300"
                   >
                     <Send size={16} />
                     Send Message

@@ -78,18 +78,18 @@ export default function PublicationsSection({ publications, stats }: Publication
           className="mb-16"
         >
           <div className="flex items-center gap-4 mb-4">
-            <div className="w-12 h-px bg-gradient-to-r from-[#9E7B28] dark:from-[#C8A558] to-transparent" />
-            <span className="text-[#9E7B28] dark:text-[#C8A558] text-xs hf-mono tracking-widest font-semibold uppercase">Research Archive</span>
+            <div className="w-12 h-px bg-gradient-to-r from-[#2563EB] dark:from-[#60A5FA] to-transparent" />
+            <span className="text-[#2563EB] dark:text-[#60A5FA] text-xs hf-mono tracking-widest font-semibold uppercase">Research Archive</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">
-            Publications & <span className="text-[#9E7B28] dark:text-[#C8A558]">Patents</span>
+            Publications & <span className="text-[#2563EB] dark:text-[#60A5FA]">Patents</span>
           </h2>
           
           {/* Minimal Stats Row */}
           <div className="flex flex-wrap gap-8 text-sm border-y border-slate-200 dark:border-white/10 py-4 mt-8">
             {computedStats.map((s, i) => (
               <div key={i} className="flex items-center gap-2">
-                <span className="text-[#9E7B28] dark:text-[#C8A558] font-mono font-bold text-lg">{s.value}</span>
+                <span className="text-[#2563EB] dark:text-[#60A5FA] font-mono font-bold text-lg">{s.value}</span>
                 <span className="text-slate-600 dark:text-[#94A3B8] font-medium">{s.label}</span>
               </div>
             ))}
@@ -105,7 +105,7 @@ export default function PublicationsSection({ publications, stats }: Publication
                 onClick={() => { setActiveTab(t); setPage(1); }}
                 className={`px-4 py-2 rounded-full text-xs font-medium transition-all duration-300 ${
                   activeTab === t
-                    ? "bg-[#C8A558] text-slate-950 font-bold shadow-md shadow-[#C8A558]/20"
+                    ? "bg-[#60A5FA] text-slate-950 font-bold shadow-md shadow-[#60A5FA]/20"
                     : "bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-[#94A3B8] hover:bg-slate-200 dark:hover:bg-white/10 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-white/5"
                 }`}
               >
@@ -121,13 +121,13 @@ export default function PublicationsSection({ publications, stats }: Publication
                 value={search}
                 onChange={(e) => { setSearch(e.target.value); setPage(1); }}
                 placeholder="Search publications..."
-                className="w-full bg-slate-50 dark:bg-transparent border border-slate-200 dark:border-white/10 rounded-full pl-10 pr-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#64748B] focus:outline-none focus:border-[#C8A558] transition-colors"
+                className="w-full bg-slate-50 dark:bg-transparent border border-slate-200 dark:border-white/10 rounded-full pl-10 pr-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#64748B] focus:outline-none focus:border-[#60A5FA] transition-colors"
               />
             </div>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as SortKey)}
-              className="bg-slate-50 dark:bg-[#0A0F1E] border border-slate-200 dark:border-white/10 rounded-full px-4 py-2.5 text-sm text-slate-700 dark:text-[#94A3B8] focus:outline-none focus:border-[#C8A558] cursor-pointer"
+              className="bg-slate-50 dark:bg-[#0A0F1E] border border-slate-200 dark:border-white/10 rounded-full px-4 py-2.5 text-sm text-slate-700 dark:text-[#94A3B8] focus:outline-none focus:border-[#60A5FA] cursor-pointer"
             >
               <option value="newest">Newest</option>
               <option value="oldest">Oldest</option>
@@ -165,11 +165,11 @@ export default function PublicationsSection({ publications, stats }: Publication
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.05 }}
-                    className="group relative flex flex-col md:flex-row gap-6 p-6 md:p-8 rounded-2xl border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[.02] hover:border-[#C8A558]/40 shadow-lg shadow-slate-900/5 dark:shadow-none transition-all duration-300"
+                    className="group relative flex flex-col md:flex-row gap-6 p-6 md:p-8 rounded-2xl border border-slate-200 dark:border-white/5 bg-white dark:bg-white/[.02] hover:border-[#60A5FA]/40 shadow-lg shadow-slate-900/5 dark:shadow-none transition-all duration-300"
                   >
                     {/* Left meta info */}
                     <div className="md:w-1/4 shrink-0 flex flex-row md:flex-col items-center md:items-start justify-between md:justify-start gap-4 md:gap-2 border-b md:border-b-0 md:border-r border-slate-200 dark:border-white/5 pb-4 md:pb-0 md:pr-6">
-                      <div className="text-2xl md:text-3xl font-display font-bold text-[#9E7B28] dark:text-[#C8A558]">
+                      <div className="text-2xl md:text-3xl font-display font-bold text-[#2563EB] dark:text-[#60A5FA]">
                         {pub.year}
                       </div>
                       <div className="px-3 py-1 rounded-full text-[10px] uppercase tracking-wider font-mono border border-slate-200 dark:border-white/10 text-slate-600 dark:text-[#94A3B8] bg-slate-50 dark:bg-white/5">
@@ -179,12 +179,12 @@ export default function PublicationsSection({ publications, stats }: Publication
 
                     {/* Main content */}
                     <div className="md:w-3/4 flex flex-col justify-center">
-                      <h3 className="text-lg md:text-xl font-bold text-slate-900 dark:text-white group-hover:text-[#9E7B28] dark:group-hover:text-[#C8A558] transition-colors leading-snug mb-2">
+                      <h3 className="text-lg md:text-xl font-bold text-slate-900 dark:text-white group-hover:text-[#2563EB] dark:group-hover:text-[#60A5FA] transition-colors leading-snug mb-2">
                         {pub.title}
                       </h3>
                       
                       <div className="mb-3">
-                        <div className="text-sm text-[#9E7B28] dark:text-[#E2C07A] font-semibold mb-1">{pub.publisher}</div>
+                        <div className="text-sm text-[#2563EB] dark:text-[#93C5FD] font-semibold mb-1">{pub.publisher}</div>
                         {pub.authors && pub.authors.length > 0 && (
                           <div className="text-sm text-slate-600 dark:text-[#94A3B8] leading-relaxed">
                             <span className="font-semibold text-slate-800 dark:text-white/80 mr-1">Authors:</span>
@@ -196,7 +196,7 @@ export default function PublicationsSection({ publications, stats }: Publication
                       {/* Corresponding Authors */}
                       {pub.correspondingAuthors && pub.correspondingAuthors.length > 0 && (
                         <div className="mb-4 p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10">
-                          <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-[#9E7B28] dark:text-[#C8A558] uppercase tracking-wider mb-1.5">
+                          <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-[#2563EB] dark:text-[#60A5FA] uppercase tracking-wider mb-1.5">
                             <UserCheck size={13} />
                             Corresponding Author(s)
                           </div>
@@ -208,7 +208,7 @@ export default function PublicationsSection({ publications, stats }: Publication
                                   <span className="text-slate-500 dark:text-white/40 text-[11px]">({ca.affiliation})</span>
                                 )}
                                 {ca.email && (
-                                  <a href={`mailto:${ca.email}`} className="text-[#9E7B28] dark:text-[#C8A558] inline-flex items-center gap-0.5 hover:underline font-medium text-[11px]">
+                                  <a href={`mailto:${ca.email}`} className="text-[#2563EB] dark:text-[#60A5FA] inline-flex items-center gap-0.5 hover:underline font-medium text-[11px]">
                                     <Mail size={11} /> {ca.email}
                                   </a>
                                 )}
@@ -237,12 +237,12 @@ export default function PublicationsSection({ publications, stats }: Publication
                         {/* Action Links */}
                         <div className="flex items-center gap-4">
                           {pub.doi && (
-                            <a href={pub.doi} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs font-semibold text-[#9E7B28] dark:text-[#C8A558] hover:underline transition-colors">
+                            <a href={pub.doi} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs font-semibold text-[#2563EB] dark:text-[#60A5FA] hover:underline transition-colors">
                               <ExternalLink size={14} /> DOI / Link
                             </a>
                           )}
                           {pub.pdfUrl && (
-                            <a href={pub.pdfUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs font-semibold text-[#9E7B28] dark:text-[#C8A558] hover:underline transition-colors">
+                            <a href={pub.pdfUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs font-semibold text-[#2563EB] dark:text-[#60A5FA] hover:underline transition-colors">
                               <FileText size={14} /> PDF
                             </a>
                           )}
@@ -264,7 +264,7 @@ export default function PublicationsSection({ publications, stats }: Publication
             </button>
             <div className="flex items-center gap-1 px-4">
               {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
-                <button key={n} onClick={() => goPage(n)} className={`w-8 h-8 rounded-full text-sm font-medium transition-all ${safePage === n ? "bg-[#C8A558] text-slate-950 font-bold" : "text-slate-600 dark:text-[#64748B] hover:bg-slate-100 dark:hover:bg-white/5"}`}>
+                <button key={n} onClick={() => goPage(n)} className={`w-8 h-8 rounded-full text-sm font-medium transition-all ${safePage === n ? "bg-[#60A5FA] text-slate-950 font-bold" : "text-slate-600 dark:text-[#64748B] hover:bg-slate-100 dark:hover:bg-white/5"}`}>
                   {n}
                 </button>
               ))}

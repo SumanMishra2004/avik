@@ -46,8 +46,8 @@ export default function HeroSection({ personalInfo, heroStats, heroTags }: HeroS
             transition={{ duration: 0.7, delay: 0.2 }}
             className="flex items-center gap-3 mb-6"
           >
-            <div className="h-px w-10 bg-[#9E7B28] dark:bg-[#C8A558]" />
-            <span className="hf-mono text-[10px] sm:text-xs tracking-[0.24em] text-[#9E7B28] dark:text-[#C8A558] uppercase font-semibold">
+            <div className="h-px w-10 bg-[#2563EB] dark:bg-[#60A5FA]" />
+            <span className="hf-mono text-[10px] sm:text-xs tracking-[0.24em] text-[#2563EB] dark:text-[#60A5FA] uppercase font-semibold">
               PhD · IIEST Shibpur &nbsp;·&nbsp; Associate Professor · UEM Kolkata
             </span>
           </motion.div>
@@ -62,7 +62,7 @@ export default function HeroSection({ personalInfo, heroStats, heroTags }: HeroS
               transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             >
               {personalInfo.name.split(" ").slice(0, -1).join(" ")}{" "}
-              <em className="not-italic text-[#9E7B28] dark:text-[#C8A558]">
+              <em className="not-italic text-[#2563EB] dark:text-[#60A5FA]">
                 {personalInfo.name.split(" ").slice(-1)}
               </em>
             </motion.h1>
@@ -78,7 +78,7 @@ export default function HeroSection({ personalInfo, heroStats, heroTags }: HeroS
             {heroTags.map((t) => (
               <span
                 key={t}
-                className="hero-tag hf-mono border-slate-300 dark:border-white/10 text-slate-600 dark:text-white/60 hover:border-[#C8A558] hover:text-[#9E7B28] dark:hover:text-[#C8A558]"
+                className="hero-tag hf-mono border-slate-300 dark:border-white/10 text-slate-600 dark:text-white/60 hover:border-[#60A5FA] hover:text-[#2563EB] dark:hover:text-[#60A5FA]"
               >
                 {t}
               </span>
@@ -135,14 +135,14 @@ export default function HeroSection({ personalInfo, heroStats, heroTags }: HeroS
           transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
         >
           <div className="relative">
-            {/* Gold offset frame */}
+            {/* Blue offset frame */}
             <div
               aria-hidden
               className="absolute inset-0 translate-x-3 translate-y-3 -z-10"
               style={{
                 clipPath: "polygon(0 0, 100% 0, 100% 88%, 88% 100%, 0 100%)",
                 background:
-                  "linear-gradient(160deg, rgba(200,165,88,0.4) 0%, rgba(200,165,88,0.1) 60%, transparent 100%)",
+                  "linear-gradient(160deg, rgba(96,165,250,0.4) 0%, rgba(96,165,250,0.1) 60%, transparent 100%)",
               }}
             />
 
@@ -173,18 +173,18 @@ export default function HeroSection({ personalInfo, heroStats, heroTags }: HeroS
 
             {/* Floating card — top left */}
             <motion.div
-              className="absolute -left-12 top-10 bg-white/90 dark:bg-[#161920]/80 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 shadow-xl"
+              className="absolute -left-12 top-10 bg-white/90 dark:bg-[#0C1425]/80 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 shadow-xl"
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
             >
-              <p className="hf-mono text-[9px] text-[#9E7B28] dark:text-[#C8A558] font-bold tracking-widest mb-0.5">FUNDED RESEARCH</p>
+              <p className="hf-mono text-[9px] text-[#2563EB] dark:text-[#60A5FA] font-bold tracking-widest mb-0.5">FUNDED RESEARCH</p>
               <p className="hf-body text-slate-900 dark:text-white text-xs font-bold leading-tight">PRISM · DSIR</p>
               <p className="hf-body text-slate-500 dark:text-white/40 text-[11px] mt-0.5">MeitY TIDE Grant</p>
             </motion.div>
 
             {/* Floating card — bottom right */}
             <motion.div
-              className="absolute -right-8 bottom-20 bg-[#C8A558] text-slate-950 backdrop-blur-xl rounded-xl px-4 py-3 shadow-xl"
+              className="absolute -right-8 bottom-20 bg-[#60A5FA] text-slate-950 backdrop-blur-xl rounded-xl px-4 py-3 shadow-xl"
               animate={{ y: [0, 6, 0] }}
               transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             >
@@ -226,7 +226,7 @@ export default function HeroSection({ personalInfo, heroStats, heroTags }: HeroS
                   style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1 }}
                 >
                   {stat.value}
-                  <span className="text-[#9E7B28] dark:text-[#C8A558] text-[0.7em]">{stat.suffix}</span>
+                  <span className="text-[#2563EB] dark:text-[#60A5FA] text-[0.7em]">{stat.suffix}</span>
                 </p>
                 <p
                   className="hf-mono uppercase tracking-[0.2em] mt-2 font-medium"
